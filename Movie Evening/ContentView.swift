@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+@available(iOS 17.0, *)
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
@@ -55,6 +56,10 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    if #available(iOS 17.0, *) {
+        ContentView()
+            .modelContainer(for: Item.self, inMemory: true)
+    } else {
+        // Fallback on earlier versions
+    }
 }
