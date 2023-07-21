@@ -90,8 +90,10 @@ struct Movies: View {
                 }
             }
             .padding()
+            .scrollTargetLayout()
         }
         .navigationTitle(R.Strings.titleMovie)
+        .scrollTargetBehavior(.viewAligned)
     }
     
 }
