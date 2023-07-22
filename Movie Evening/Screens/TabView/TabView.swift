@@ -14,7 +14,7 @@ struct TabBar: View {
         TabView {
             
             NavigationView {
-                Movies()
+                Movies(viewModel: MovieViewModel())
             }
             .tabItem {
                 Label {

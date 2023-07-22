@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct MovieModel: Identifiable {
+ 
+    let id = UUID()
+    let urlImage: String
+    let name: String
+    let ratingImdb: Double
+    let year: Int
+}

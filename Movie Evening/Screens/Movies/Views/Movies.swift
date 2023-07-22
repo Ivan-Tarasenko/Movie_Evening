@@ -6,98 +6,77 @@
 //
 
 import SwiftUI
-////////////////////////////////////////////////////////////////////////////////////
+
 struct CollectionView: View {
-    let title: String
+    
+    let urlImage: String
+    let name: String
+    let rating: Double
+    let year: Int
+    
     var body: some View {
+        
         ZStack {
-            VStack {
-                RoundedRectangle(cornerRadius: 10).foregroundColor(.random)
-                Text(title)
-                    .font(.title2)
+            VStack(alignment: .leading) {
+                Image(urlImage, bundle: nil)
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 10))
+                
+                Text(name)
+                Text("IMDb: \(String(rating))")
+                Text(String(year))
+                    
+                
             }
-            Text("test")
+            .padding(10)
         }
+        .background(.gray)
+        .clipShape(.rect(cornerRadius: 10))
         
     }
 }
 
-extension Color {
-    static var random: Color {
-        return Color(
-            red: .random(in: 0...1),
-            green: .random(in: 0...1),
-            blue: .random(in: 0...1)
-        )
-    }
-}
-
-// MARK: - CardView
-struct Card: Identifiable {
-    let id = UUID()
-    let title: String
-}
-// MARK: - RowView
-
-
-struct MockStore {
-    static var cards = [
-        Card(title: "Italy"),
-        Card(title: "England"),
-        Card(title: "Portugal"),
-        Card(title: "Belgium"),
-        Card(title: "Germany"),
-        Card(title: "Mexico"),
-        Card(title: "Canada"),
-        Card(title: "Italy"),
-        Card(title: "England"),
-        Card(title: "Portugal"),
-        Card(title: "Belgium"),
-        Card(title: "Germany"),
-        Card(title: "Mexico"),
-        Card(title: "Canada"),
-        Card(title: "England"),
-        Card(title: "Portugal"),
-        Card(title: "Belgium"),
-        Card(title: "Germany"),
-        Card(title: "Mexico"),
-        Card(title: "Canada"),
-    ]
-}
 
 
 
 
-struct Movies: View {
-       var columns: [GridItem] = [
-           GridItem(.flexible()),
-           GridItem(.flexible()),
-       ]
 
-       let height: CGFloat = 290
- 
-       let cards: [Card] = MockStore.cards
+struct Movies<ViewModel: MovieViewModelProtocol>: View {
     
+    @ObservedObject var viewModel: ViewModel
+    
+    var columns: [GridItem] = [GridItem(.flexible())]
     
     var body: some View {
         
-        ScrollView {
-            LazyVGrid(columns: columns, spacing:40) {
-                ForEach(cards) { card in
-                    CollectionView(title: card.title)
-                        .frame(height: height)
-
+        List {
+            ForEach(viewModel.sections) {section in
+                
+                Section(header: section.titleSection) {
+                    ScrollView(.horizontal) {
+                        LazyHGrid(rows: columns) {
+                            ForEach(viewModel.mockMovies) { movie in
+                                CollectionView(
+                                    urlImage: "360",
+                                    name: movie.name,
+                                    rating: movie.ratingImdb,
+                                    year: movie.year
+                                )
+                                    .frame(width: 170, height: 300)
+                                    
+                            }
+                        }
+                    }
                 }
+                .font(.custom("Roboto-Light", size: 23))
+                .headerProminence(.increased)
             }
-            .padding()
-            .scrollTargetLayout()
         }
-        .navigationTitle(R.Strings.titleMovie)
-        .scrollTargetBehavior(.viewAligned)
+//        .navigationTitle(R.Strings.titleMovie)
     }
     
 }
 
 #Preview {
-    Movies()
+    Movies(viewModel: MovieViewModel())
 }
