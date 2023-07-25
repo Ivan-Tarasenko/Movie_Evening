@@ -13,10 +13,14 @@ protocol MovieViewModelProtocol: ObservableObject {
     
     var mockMovies: [MovieModel] { get }
     
+    var searchText: String { get set }
+    
+    var isSearch: Bool { get set }
+    
 }
 
 final class MovieViewModel: MovieViewModelProtocol {
-    
+
      let sections: [SectionModel] = [
         .init(titleSection: R.Strings.top10),
         .init(titleSection: R.Strings.top250),
@@ -57,6 +61,9 @@ final class MovieViewModel: MovieViewModelProtocol {
         .init(urlImage: "", name: "Джентельмены", ratingImdb: 8.5, year: 2019),
     ]
     
+    @Published var searchText: String = ""
+    
+    @Published var isSearch: Bool = false
     
     init() {}
 }

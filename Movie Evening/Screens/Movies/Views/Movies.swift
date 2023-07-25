@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionView: View {
+struct CardMovie: View {
     
     let urlImage: String
     let name: String
@@ -22,9 +22,12 @@ struct CollectionView: View {
                     .resizable()
                     .clipShape(.rect(cornerRadius: 10))
                 
-                Text(name)
-                Text("IMDb: \(String(rating))")
-                Text(String(year))
+                VStack(alignment: .leading) {
+                    Text(name)
+                    Text("IMDb: \(String(rating))")
+                    Text("Yesr: \(String(year))")
+                }
+                .font(.custom(R.Fonts.robotoLight, size: 16))
                     
                 
             }
@@ -38,9 +41,6 @@ struct CollectionView: View {
 
 
 
-
-
-
 struct Movies<ViewModel: MovieViewModelProtocol>: View {
     
     @ObservedObject var viewModel: ViewModel
@@ -49,30 +49,42 @@ struct Movies<ViewModel: MovieViewModelProtocol>: View {
     
     var body: some View {
         
-        List {
-            ForEach(viewModel.sections) {section in
+        VStack(alignment: .trailing) {
+            
+            Search(viewModel: viewModel)
+            
+            List {
+                ForEach(viewModel.sections) { section in
                 
-                Section(header: section.titleSection) {
-                    ScrollView(.horizontal) {
-                        LazyHGrid(rows: columns) {
-                            ForEach(viewModel.mockMovies) { movie in
-                                CollectionView(
-                                    urlImage: "360",
-                                    name: movie.name,
-                                    rating: movie.ratingImdb,
-                                    year: movie.year
-                                )
+                    Section(header: SectionHeaderView(title: section.titleSection) {
+                        // Обработка нажатия кнопки "See All"
+                        print("See All button tapped for ")
+                    }) {
+                        ScrollView(.horizontal) {
+                            LazyHGrid(rows: columns) {
+                                ForEach(viewModel.mockMovies) { movie in
+                                    CardMovie(
+                                        urlImage: "360",
+                                        name: movie.name,
+                                        rating: movie.ratingImdb,
+                                        year: movie.year
+                                    )
                                     .frame(width: 170, height: 300)
                                     
+                                }
                             }
                         }
+                        
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
+                    .headerProminence(.increased)
+                    .scrollIndicators(.hidden)
                 }
-                .font(.custom("Roboto-Light", size: 23))
-                .headerProminence(.increased)
             }
+            .scrollContentBackground(.hidden)
         }
-//        .navigationTitle(R.Strings.titleMovie)
+        .background(Color.background)
+        
     }
     
 }

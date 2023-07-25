@@ -12,6 +12,7 @@ import SwiftData
 struct Movie_EveningApp: App {
 
     var body: some Scene {
+        
         WindowGroup {
            TabBar()
         }

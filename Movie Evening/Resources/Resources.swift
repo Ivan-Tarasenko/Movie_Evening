@@ -54,4 +54,15 @@ enum R {
         static let iconRandom = Image(.random)
         static let iconFavorite = Image(.heart)
     }
+    
+    enum Fonts {
+        static let robotoRegular = "Roboto-Regular"
+        static let robotoLight = "Roboto-Light"
+        static let karmaSemiBold = "Karma-SemiBold"
+    }
+    
+    enum BoundsScreen {
+        static let widthScreen = UIScreen.main.bounds.width
+        static let heightScreen = UIScreen.main.bounds.height
+    }
 }

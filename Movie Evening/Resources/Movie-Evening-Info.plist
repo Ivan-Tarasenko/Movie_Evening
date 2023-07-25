@@ -6,7 +6,6 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Karma-Bold.ttf</string>
 		<string>Karma-SemiBold.ttf</string>
 		<string>Roboto-Light.ttf</string>
 		<string>Roboto-Regular.ttf</string>

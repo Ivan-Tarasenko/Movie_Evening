@@ -1,5 +1,5 @@
 //
-//  CollectionView.swift
+//  CardMovie.swift
 //  Movie Evening
 //
 //  Created by Иван Тарасенко on 21.07.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//struct CollectionView: View {
+//struct CardMovie: View {
 //    let title: String
 //    var body: some View {
 //        ZStack {
