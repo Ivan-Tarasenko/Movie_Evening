@@ -20,7 +20,7 @@ struct CardMovie: View {
             VStack(alignment: .leading) {
                 Image(urlImage, bundle: nil)
                     .resizable()
-                    .clipShape(.rect(cornerRadius: 10))
+                    .clipShape(.rect(cornerRadius: 19))
                 
                 VStack(alignment: .leading) {
                     Text(name)
@@ -28,13 +28,13 @@ struct CardMovie: View {
                     Text("Yesr: \(String(year))")
                 }
                 .font(.custom(R.Fonts.robotoLight, size: 16))
-                    
+                
                 
             }
             .padding(10)
         }
-        .background(.gray)
-        .clipShape(.rect(cornerRadius: 10))
+        .background(.backgroundMovieItem)
+        .clipShape(.rect(cornerRadius: 19))
         
     }
 }
@@ -45,24 +45,25 @@ struct Movies<ViewModel: MovieViewModelProtocol>: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    var columns: [GridItem] = [GridItem(.flexible())]
-    
     var body: some View {
         
-        VStack(alignment: .trailing) {
-            
-            Search(viewModel: viewModel)
+        VStack {
             
             List {
-                ForEach(viewModel.sections) { section in
                 
+                ForEach(viewModel.sections) { section in
+                    
                     Section(header: SectionHeaderView(title: section.titleSection) {
                         // Обработка нажатия кнопки "See All"
                         print("See All button tapped for ")
                     }) {
+                        
                         ScrollView(.horizontal) {
-                            LazyHGrid(rows: columns) {
+                            
+                            LazyHStack {
+                                
                                 ForEach(viewModel.mockMovies) { movie in
+                                    
                                     CardMovie(
                                         urlImage: "360",
                                         name: movie.name,
@@ -72,18 +73,25 @@ struct Movies<ViewModel: MovieViewModelProtocol>: View {
                                     .frame(width: 170, height: 300)
                                     
                                 }
+                                
                             }
+                            
                         }
                         
                     }
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
-                    .headerProminence(.increased)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 20, trailing: 0))
                     .scrollIndicators(.hidden)
+                    .headerProminence(.increased)
+                    
                 }
+                
             }
             .scrollContentBackground(.hidden)
+            .listStyle(.plain)
+            
         }
-        .background(Color.background)
+        .navigationTitle(R.Strings.titleMovie)
+        .background(R.Colors.customBackground)
         
     }
     

@@ -20,7 +20,7 @@ struct SectionHeaderView: View {
             Spacer()
             
             Button(action: action) {
-                Text("See All")
+                R.Strings.seeAll
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }

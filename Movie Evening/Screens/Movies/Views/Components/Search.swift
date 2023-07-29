@@ -30,10 +30,10 @@ struct SearchView<ViewModel: MovieViewModelProtocol>: View {
         ZStack(alignment: .trailing) {
             
             TextField("  Search...", text: $viewModel.searchText)
-                .frame(width: viewModel.isSearch ? R.BoundsScreen.widthScreen - 65 : 50)
-                .frame(height: 50)
+                .frame(width: viewModel.isSearch ? R.BoundsScreen.widthScreen - 65 : 45)
+                .frame(height: 45)
                 .background(.search)
-                .clipShape(.rect(cornerRadius: 25))
+                .clipShape(.rect(cornerRadius: 22.5))
             
             SearchButton() {
                 withAnimation {
@@ -42,8 +42,8 @@ struct SearchView<ViewModel: MovieViewModelProtocol>: View {
             }
            
         }
-        .padding()
-        .padding(.trailing, 20)
+        .padding(.bottom, 5)
+        .padding(.trailing, 30)
     }
 }
 
@@ -54,7 +54,7 @@ struct SearchButton: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: 50)
+                .frame(width: 45)
                 .foregroundStyle(.search)
             
             Button(action: action) {

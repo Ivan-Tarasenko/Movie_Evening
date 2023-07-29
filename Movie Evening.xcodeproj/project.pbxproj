@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A4E600A2A75511F00712AF9 /* AllMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E60092A75511F00712AF9 /* AllMovies.swift */; };
 		1A6F08AD2A6AB479001BDF8B /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08AC2A6AB479001BDF8B /* SectionModel.swift */; };
 		1A6F08B02A6AB49C001BDF8B /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08AF2A6AB49C001BDF8B /* MovieModel.swift */; };
 		1A6F08B22A6AB6AC001BDF8B /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08B12A6AB6AC001BDF8B /* MovieViewModel.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A4E60092A75511F00712AF9 /* AllMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMovies.swift; sourceTree = "<group>"; };
 		1A6F08AC2A6AB479001BDF8B /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
 		1A6F08AF2A6AB49C001BDF8B /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		1A6F08B12A6AB6AC001BDF8B /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				1AB33C242A6D543D00FEA54D /* Components */,
 				1ADF66292A63F10A002119DD /* Movies.swift */,
+				1A4E60092A75511F00712AF9 /* AllMovies.swift */,
 				1ABADB5E2A67BCA7006401CA /* DetailAboutFilm.swift */,
 			);
 			path = Views;
@@ -457,6 +460,7 @@
 				1A6F08B52A6AC370001BDF8B /* CollectionView.swift in Sources */,
 				1ADF66262A63F0D9002119DD /* Random.swift in Sources */,
 				1AB33C292A6D5B5300FEA54D /* View+Border.swift in Sources */,
+				1A4E600A2A75511F00712AF9 /* AllMovies.swift in Sources */,
 				1A6F08B02A6AB49C001BDF8B /* MovieModel.swift in Sources */,
 				1ADF66282A63F0F2002119DD /* Serials.swift in Sources */,
 				1ADF66242A63F0C3002119DD /* Favorites.swift in Sources */,

@@ -46,6 +46,9 @@ enum R {
         static let musical = Text("Musicals")
         static let talkShow = Text("Talk shows")
         static let game = Text("Games")
+        
+        // Section
+        static let seeAll = Text("See All")
     }
     
     enum Icons {
@@ -64,5 +67,9 @@ enum R {
     enum BoundsScreen {
         static let widthScreen = UIScreen.main.bounds.width
         static let heightScreen = UIScreen.main.bounds.height
+    }
+    
+    enum Colors {
+        static let customBackground = LinearGradient(colors: [.customDarkPurple, .customBlack, .customPurple], startPoint: .top, endPoint: .bottom)
     }
 }

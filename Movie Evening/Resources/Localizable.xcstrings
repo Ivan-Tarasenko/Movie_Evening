@@ -2,11 +2,24 @@
   "sourceLanguage" : "en",
   "strings" : {
     "  Search..." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  Search..."
+          }
+        }
+      }
     },
     "Anime" : {
       "localizations" : {
         "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anime"
+          }
+        },
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anime"
@@ -44,6 +57,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Biographien"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biographies"
           }
         },
         "es" : {
@@ -592,7 +611,38 @@
       }
     },
     "IMDb: %@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IMDb:%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IMDb:%@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IMDb:%@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IMDb:%@"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IMDb:%@"
+          }
+        }
+      }
     },
     "Melodramas" : {
       "localizations" : {
@@ -777,7 +827,38 @@
       }
     },
     "See All" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles ansehen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver todo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regarder tout"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все фильмы"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全看"
+          }
+        }
+      }
     },
     "Serials" : {
       "localizations" : {
@@ -1024,7 +1105,38 @@
       }
     },
     "Yesr: %@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jahr:%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Año:%@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Année:%@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Год:%@"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "年份:%@"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
