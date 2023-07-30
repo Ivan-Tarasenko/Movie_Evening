@@ -11,7 +11,7 @@
 		1A6F08AD2A6AB479001BDF8B /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08AC2A6AB479001BDF8B /* SectionModel.swift */; };
 		1A6F08B02A6AB49C001BDF8B /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08AF2A6AB49C001BDF8B /* MovieModel.swift */; };
 		1A6F08B22A6AB6AC001BDF8B /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08B12A6AB6AC001BDF8B /* MovieViewModel.swift */; };
-		1A6F08B52A6AC370001BDF8B /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08B42A6AC370001BDF8B /* CollectionView.swift */; };
+		1A6F08B52A6AC370001BDF8B /* CardMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F08B42A6AC370001BDF8B /* CardMovie.swift */; };
 		1A6F08BB2A6B947F001BDF8B /* Karma-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A6F08B72A6B947F001BDF8B /* Karma-SemiBold.ttf */; };
 		1A6F08BC2A6B947F001BDF8B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A6F08B82A6B947F001BDF8B /* Roboto-Regular.ttf */; };
 		1A6F08BD2A6B947F001BDF8B /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A6F08B92A6B947F001BDF8B /* Roboto-Light.ttf */; };
@@ -59,7 +59,7 @@
 		1A6F08AC2A6AB479001BDF8B /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
 		1A6F08AF2A6AB49C001BDF8B /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		1A6F08B12A6AB6AC001BDF8B /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
-		1A6F08B42A6AC370001BDF8B /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		1A6F08B42A6AC370001BDF8B /* CardMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMovie.swift; sourceTree = "<group>"; };
 		1A6F08B72A6B947F001BDF8B /* Karma-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karma-SemiBold.ttf"; sourceTree = "<group>"; };
 		1A6F08B82A6B947F001BDF8B /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		1A6F08B92A6B947F001BDF8B /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
@@ -126,7 +126,6 @@
 		1A6F08AA2A6AB41D001BDF8B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1AB33C242A6D543D00FEA54D /* Components */,
 				1ADF66292A63F10A002119DD /* Movies.swift */,
 				1A4E60092A75511F00712AF9 /* AllMovies.swift */,
 				1ABADB5E2A67BCA7006401CA /* DetailAboutFilm.swift */,
@@ -145,7 +144,8 @@
 		1A6F08B32A6AC34B001BDF8B /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				1A6F08B42A6AC370001BDF8B /* CollectionView.swift */,
+				1AB33C252A6D547B00FEA54D /* Search.swift */,
+				1A6F08B42A6AC370001BDF8B /* CardMovie.swift */,
 				1A9558E82A7014ED00A1CE59 /* SectionHeaderView.swift */,
 			);
 			path = CustomView;
@@ -159,14 +159,6 @@
 				1A6F08B82A6B947F001BDF8B /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		1AB33C242A6D543D00FEA54D /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				1AB33C252A6D547B00FEA54D /* Search.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		1AB33C272A6D5B3800FEA54D /* Extensions */ = {
@@ -188,9 +180,7 @@
 		1AC1DC4B2A6402930053B4F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1AB33C272A6D5B3800FEA54D /* Extensions */,
 				1A6F08B62A6B943B001BDF8B /* Fonts */,
-				1A6F08B32A6AC34B001BDF8B /* CustomView */,
 				1ADF65F22A63EB31002119DD /* Assets.xcassets */,
 				1A83F34F2A661E2A0025E89B /* Localizable.xcstrings */,
 				1A83F3512A6631A20025E89B /* Resources.swift */,
@@ -222,9 +212,11 @@
 		1ADF65ED2A63EB2F002119DD /* Movie Evening */ = {
 			isa = PBXGroup;
 			children = (
-				1AC1DC4B2A6402930053B4F9 /* Resources */,
 				1AC1DC4A2A6402580053B4F9 /* Application */,
 				1ADF661B2A63EED6002119DD /* Screens */,
+				1AC1DC4B2A6402930053B4F9 /* Resources */,
+				1A6F08B32A6AC34B001BDF8B /* CustomView */,
+				1AB33C272A6D5B3800FEA54D /* Extensions */,
 				1ADF65F42A63EB31002119DD /* Preview Content */,
 			);
 			path = "Movie Evening";
@@ -457,7 +449,7 @@
 				1A83F3522A6631A20025E89B /* Resources.swift in Sources */,
 				1ABADB652A67BD05006401CA /* DetailFavoriteFilm.swift in Sources */,
 				1A6F08B22A6AB6AC001BDF8B /* MovieViewModel.swift in Sources */,
-				1A6F08B52A6AC370001BDF8B /* CollectionView.swift in Sources */,
+				1A6F08B52A6AC370001BDF8B /* CardMovie.swift in Sources */,
 				1ADF66262A63F0D9002119DD /* Random.swift in Sources */,
 				1AB33C292A6D5B5300FEA54D /* View+Border.swift in Sources */,
 				1A4E600A2A75511F00712AF9 /* AllMovies.swift in Sources */,

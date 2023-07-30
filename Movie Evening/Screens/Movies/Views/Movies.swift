@@ -7,47 +7,15 @@
 
 import SwiftUI
 
-struct CardMovie: View {
-    
-    let urlImage: String
-    let name: String
-    let rating: Double
-    let year: Int
-    
-    var body: some View {
-        
-        ZStack {
-            VStack(alignment: .leading) {
-                Image(urlImage, bundle: nil)
-                    .resizable()
-                    .clipShape(.rect(cornerRadius: 19))
-                
-                VStack(alignment: .leading) {
-                    Text(name)
-                    Text("IMDb: \(String(rating))")
-                    Text("Yesr: \(String(year))")
-                }
-                .font(.custom(R.Fonts.robotoLight, size: 16))
-                
-                
-            }
-            .padding(10)
-        }
-        .background(.backgroundMovieItem)
-        .clipShape(.rect(cornerRadius: 19))
-        
-    }
-}
-
-
-
 struct Movies<ViewModel: MovieViewModelProtocol>: View {
     
     @ObservedObject var viewModel: ViewModel
     
+    var columns: [GridItem] = [GridItem(.flexible())]
+    
     var body: some View {
         
-        VStack {
+//        VStack {
             
             List {
                 
@@ -59,8 +27,8 @@ struct Movies<ViewModel: MovieViewModelProtocol>: View {
                     }) {
                         
                         ScrollView(.horizontal) {
-                            
-                            LazyHStack {
+
+                            LazyHGrid(rows: columns) {
                                 
                                 ForEach(viewModel.mockMovies) { movie in
                                     
@@ -79,7 +47,9 @@ struct Movies<ViewModel: MovieViewModelProtocol>: View {
                         }
                         
                     }
-                    .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 20, trailing: 0))
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 10, trailing: 0))
                     .scrollIndicators(.hidden)
                     .headerProminence(.increased)
                     
@@ -87,11 +57,11 @@ struct Movies<ViewModel: MovieViewModelProtocol>: View {
                 
             }
             .scrollContentBackground(.hidden)
-            .listStyle(.plain)
+            .listStyle(.grouped)
+            .navigationTitle(R.Strings.titleMovie)
+            .background(R.Colors.customBackground)
             
-        }
-        .navigationTitle(R.Strings.titleMovie)
-        .background(R.Colors.customBackground)
+//        }
         
     }
     
