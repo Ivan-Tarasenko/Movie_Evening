@@ -9,13 +9,32 @@ import SwiftUI
 
 struct TabBar: View {
     
+    @StateObject var coordinator = Coordinator()
+    
     var body: some View {
         
         TabView {
             
-            NavigationView {
-                Movies(viewModel: MovieViewModel())
+            
+            
+            NavigationStack(path: $coordinator.path) {
+                coordinator.build(page: .previewMoviews)
+                    .navigationDestination(for: Page.self) { page in
+                        coordinator.build(page: page)
+                    }
+                    .sheet(item: $coordinator.sheet) { sheet in
+                        coordinator.build(sheet: sheet)
+                    }
+                    .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
+                        coordinator.build(fullScreenCover: fullScreenCover)
+                    }
             }
+            .environmentObject(coordinator)
+            
+            
+            
+            
+            
             .tabItem {
                 Label {
                     R.Strings.titleMovie
@@ -56,7 +75,7 @@ struct TabBar: View {
                 } icon: {
                     R.Icons.iconFavorite
                 }
-
+                
             }
             
         }

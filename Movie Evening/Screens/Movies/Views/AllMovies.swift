@@ -9,7 +9,9 @@ import SwiftUI
 
 struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
     
+    @EnvironmentObject  var coordinator: Coordinator
     @ObservedObject var viewModel: ViewModel
+    
     
     var columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
@@ -24,6 +26,9 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
                         year: movie.year
                     )
                     .frame(width: 170, height: 300)
+                    .onTapGesture {
+                        coordinator.present(fullScreenCover: .detailAboutFilm)
+                    }
                     
                 }
             }

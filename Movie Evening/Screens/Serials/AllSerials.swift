@@ -1,18 +1,18 @@
 //
-//  DetailAboutSerial.swift
+//  AllSerials.swift
 //  Movie Evening
 //
-//  Created by Иван Тарасенко on 19.07.2023.
+//  Created by Иван Тарасенко on 30.07.2023.
 //
 
 import SwiftUI
 
-struct DetailAboutSerial: View {
+struct AllSerials: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    DetailAboutSerial()
+    AllSerials()
 }
