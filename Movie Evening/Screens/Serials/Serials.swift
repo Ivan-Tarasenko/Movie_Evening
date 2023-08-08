@@ -17,6 +17,12 @@ struct Serials: View {
     }
 }
 
-#Preview {
-    Serials()
+//#Preview {
+//    Serials()
+//}
+
+struct Serials_Previews: PreviewProvider {
+    static var previews: some View {
+        Serials()
+    }
 }

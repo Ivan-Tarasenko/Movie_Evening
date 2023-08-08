@@ -15,7 +15,7 @@ struct SectionHeaderView: View {
         HStack {
              title
                 .font(.custom(R.Fonts.robotoRegular, size: 20))
-                .foregroundColor(Color.headerSection)
+                .foregroundColor(Color("headerSection"))
             
             Spacer()
             

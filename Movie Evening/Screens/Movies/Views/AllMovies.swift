@@ -34,10 +34,16 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(R.Colors.customBackground)
+//        .background(R.Colors.customBackground)
     }
 }
 
-#Preview {
-    AllMovies(viewModel: MovieViewModel())
+//#Preview {
+//    AllMovies(viewModel: MovieViewModel())
+//}
+
+struct AllMovies_Previews: PreviewProvider {
+    static var previews: some View {
+        AllMovies(viewModel: MovieViewModel())
+    }
 }

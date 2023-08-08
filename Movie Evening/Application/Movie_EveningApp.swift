@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftData
+//import SwiftData
 
 @main
 struct Movie_EveningApp: App {

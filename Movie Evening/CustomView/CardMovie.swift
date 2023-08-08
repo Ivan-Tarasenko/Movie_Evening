@@ -20,7 +20,8 @@ struct CardMovie: View {
             VStack(alignment: .leading) {
                 Image(urlImage, bundle: nil)
                     .resizable()
-                    .clipShape(.rect(cornerRadius: 19))
+//                    .clipShape(.rect(cornerRadius: 19))
+                    .cornerRadius(19)
                 
                 VStack(alignment: .leading) {
                     Text(name)
@@ -33,12 +34,19 @@ struct CardMovie: View {
             }
             .padding(10)
         }
-        .background(.backgroundMovieItem)
-        .clipShape(.rect(cornerRadius: 19))
+//        .background(.backgroundMovieItem)
+//        .clipShape(.rect(cornerRadius: 19))
+        .cornerRadius(19)
         
     }
 }
 
-#Preview {
-    CardMovie(urlImage: "", name: "", rating: 0.0, year: 0)
+//#Preview {
+//    CardMovie(urlImage: "", name: "", rating: 0.0, year: 0)
+//}
+
+struct CardMovie_Previews: PreviewProvider {
+    static var previews: some View {
+        CardMovie(urlImage: "", name: "", rating: 0.0, year: 0)
+    }
 }

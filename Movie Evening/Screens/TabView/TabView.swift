@@ -79,7 +79,7 @@ struct TabBar: View {
             }
             
         }
-        .tint(.activeTabBtn)
+        .tint(Color("activeTabBtn"))
         
     }
     

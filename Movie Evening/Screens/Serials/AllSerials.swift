@@ -13,6 +13,12 @@ struct AllSerials: View {
     }
 }
 
-#Preview {
-    AllSerials()
+//#Preview {
+//    AllSerials()
+//}
+
+struct AllSerials_Previews: PreviewProvider {
+    static var previews: some View {
+        AllSerials()
+    }
 }

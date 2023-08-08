@@ -52,10 +52,10 @@ enum R {
     }
     
     enum Icons {
-        static let iconMovie = Image(.movies)
-        static let iconSerial = Image(.serials)
-        static let iconRandom = Image(.random)
-        static let iconFavorite = Image(.heart)
+        static let iconMovie = Image("movies")
+        static let iconSerial = Image("serials")
+        static let iconRandom = Image("random")
+        static let iconFavorite = Image("heart")
     }
     
     enum Fonts {
@@ -70,6 +70,6 @@ enum R {
     }
     
     enum Colors {
-        static let customBackground = LinearGradient(colors: [.customDarkPurple, .customBlack, .customPurple], startPoint: .top, endPoint: .bottom)
+//        static let customBackground = LinearGradient(colors: [.customDarkPurple, .customBlack, .customPurple], startPoint: .top, endPoint: .bottom)
     }
 }

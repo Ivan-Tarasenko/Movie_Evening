@@ -9,10 +9,16 @@ import SwiftUI
 
 struct FullImage: View {
     var body: some View {
-        Image(._360)
+        Image("360")
     }
 }
 
-#Preview {
-    FullImage()
+//#Preview {
+//    FullImage()
+//}
+
+struct FullImage_Previews: PreviewProvider {
+    static var previews: some View {
+        FullImage()
+    }
 }

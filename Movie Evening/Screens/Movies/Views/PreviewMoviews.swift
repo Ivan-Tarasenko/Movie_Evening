@@ -62,7 +62,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
         .scrollContentBackground(.hidden)
         .listStyle(.grouped)
         .navigationTitle(R.Strings.titleMovie)
-        .background(R.Colors.customBackground)
+//        .background(R.Colors.customBackground)
         
         //        }
         

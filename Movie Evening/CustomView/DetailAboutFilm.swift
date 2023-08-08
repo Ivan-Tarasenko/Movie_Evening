@@ -22,7 +22,7 @@ struct DetailAboutFilm: View {
                 /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
             })
             
-            Image(._360)
+            Image("360")
                 .onTapGesture {
                     coordinator.present(sheet: .fullIamge)
                 }
@@ -31,6 +31,12 @@ struct DetailAboutFilm: View {
     }
 }
 
-#Preview {
-    DetailAboutFilm()
+//#Preview {
+//    DetailAboutFilm()
+//}
+
+struct DetailAboutFilm_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailAboutFilm()
+    }
 }
