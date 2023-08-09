@@ -38,6 +38,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                                 )
                                 .frame(width: 170, height: 300)
                                 .onTapGesture {
+                                    coordinator.dismissFullCover()
                                     coordinator.present(fullScreenCover: .detailAboutFilm)
                                 }
                                 
@@ -61,7 +62,9 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
         .listStyle(.grouped)
         .navigationTitle(R.Strings.titleMovie)
         .background(R.Colors.customBackground)
-        
+        .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
+            coordinator.build(fullScreenCover: .detailAboutFilm)
+        }
     }
     
 }
