@@ -16,10 +16,6 @@ struct Random: View {
     }
 }
 
-//#Preview {
-//    Random()
-//}
-
 struct Random_Previews: PreviewProvider {
     static var previews: some View {
         Random()

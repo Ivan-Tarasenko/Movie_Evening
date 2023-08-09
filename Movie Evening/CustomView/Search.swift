@@ -17,10 +17,6 @@ struct Search<ViewModel: MovieViewModelProtocol>: View {
     }
 }
 
-//#Preview {
-//   Search(viewModel: MovieViewModel())
-//}
-
 struct Search_Previews: PreviewProvider {
     static var previews: some View {
         Search(viewModel: MovieViewModel())
@@ -37,9 +33,7 @@ struct SearchView<ViewModel: MovieViewModelProtocol>: View {
             TextField("  Search...", text: $viewModel.searchText)
                 .frame(width: viewModel.isSearch ? R.BoundsScreen.widthScreen - 65 : 45)
                 .frame(height: 45)
-//                .background(.search)
                 .background(Color("searchColor"))
-//                .clipShape(.rect(cornerRadius: 22.5))
                 .cornerRadius(23)
             
             SearchButton() {

@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailAboutFilm: View {
     
     @EnvironmentObject var coordinator: Coordinator
+    @State private var activateModalView = false
     
     var body: some View {
         
@@ -24,16 +25,17 @@ struct DetailAboutFilm: View {
             
             Image("360")
                 .onTapGesture {
+                    coordinator.dismissSheet()
                     coordinator.present(sheet: .fullIamge)
                 }
+            
             Text("DetailView")
         }
+        .sheet(item: $coordinator.sheet) { sheet in
+                     coordinator.build(sheet: sheet)
+                 }
     }
 }
-
-//#Preview {
-//    DetailAboutFilm()
-//}
 
 struct DetailAboutFilm_Previews: PreviewProvider {
     static var previews: some View {

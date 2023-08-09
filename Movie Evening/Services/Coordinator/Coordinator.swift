@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Page: String, Identifiable {
-    case previewMoviews, previewSerials, allMovies, allSerials, detailAboutFilm
+    case previewMoviews, previewSerials, random, favorites, allMovies, allSerials
     
     var id: String {
         self.rawValue
@@ -50,6 +50,7 @@ final class Coordinator: ObservableObject {
     }
     
     func pop() {
+        guard !path.isEmpty else { return }
         path.removeLast()
     }
     
@@ -67,13 +68,15 @@ final class Coordinator: ObservableObject {
         case .previewMoviews:
             PreviewMoviews(viewModel: MovieViewModel())
         case .previewSerials:
-            Serials()
+            PreviewSerials()
+        case .random:
+            Random()
+        case .favorites:
+            Favorites()
         case .allMovies:
             AllMovies(viewModel: MovieViewModel())
         case .allSerials:
             AllSerials()
-        case .detailAboutFilm:
-            DetailAboutFilm()
         }
     }
     

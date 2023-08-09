@@ -12,9 +12,10 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
     @EnvironmentObject  var coordinator: Coordinator
     @ObservedObject var viewModel: ViewModel
     
-    
     var columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
+        
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(viewModel.mockMovies) { movie in
@@ -27,6 +28,7 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
                     )
                     .frame(width: 170, height: 300)
                     .onTapGesture {
+                        coordinator.dismissFullCover()
                         coordinator.present(fullScreenCover: .detailAboutFilm)
                     }
                     
@@ -34,13 +36,12 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
             }
         }
         .scrollContentBackground(.hidden)
-//        .background(R.Colors.customBackground)
+        .background(R.Colors.customBackground)
+        .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
+            coordinator.build(fullScreenCover: .detailAboutFilm)
+        }
     }
 }
-
-//#Preview {
-//    AllMovies(viewModel: MovieViewModel())
-//}
 
 struct AllMovies_Previews: PreviewProvider {
     static var previews: some View {

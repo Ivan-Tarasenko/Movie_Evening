@@ -13,10 +13,6 @@ struct DetailFavoriteFilm: View {
     }
 }
 
-//#Preview {
-//    DetailFavoriteFilm()
-//}
-
 struct DetailFavoriteFilm_Previews: PreviewProvider {
     static var previews: some View {
         DetailFavoriteFilm()

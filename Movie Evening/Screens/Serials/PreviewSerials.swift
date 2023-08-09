@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Serials: View {
+struct PreviewSerials: View {
     var body: some View {
         VStack {
             Color.green
@@ -17,12 +17,8 @@ struct Serials: View {
     }
 }
 
-//#Preview {
-//    Serials()
-//}
-
-struct Serials_Previews: PreviewProvider {
+struct PreviewSerials_Previews: PreviewProvider {
     static var previews: some View {
-        Serials()
+        PreviewSerials()
     }
 }

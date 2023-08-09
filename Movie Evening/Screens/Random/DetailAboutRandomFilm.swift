@@ -13,10 +13,6 @@ struct DetailAboutRandomFilm: View {
     }
 }
 
-//#Preview {
-//    DetailAboutRandomFilm()
-//}
-
 struct DetailAboutRandomFilm_Previews: PreviewProvider {
     static var previews: some View {
         DetailAboutRandomFilm()

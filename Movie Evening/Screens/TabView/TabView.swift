@@ -15,74 +15,62 @@ struct TabBar: View {
         
         TabView {
             
+            BaseScreen(
+                page: .previewMoviews,
+                titleTabBar: R.Strings.titleMovie,
+                iconTabBar: R.Icons.iconMovie
+            )
             
+            BaseScreen(
+                page: .previewSerials,
+                titleTabBar: R.Strings.titleSerial,
+                iconTabBar: R.Icons.iconSerial
+            )
             
-            NavigationStack(path: $coordinator.path) {
-                coordinator.build(page: .previewMoviews)
-                    .navigationDestination(for: Page.self) { page in
-                        coordinator.build(page: page)
-                    }
-                    .sheet(item: $coordinator.sheet) { sheet in
-                        coordinator.build(sheet: sheet)
-                    }
-                    .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
-                        coordinator.build(fullScreenCover: fullScreenCover)
-                    }
-            }
-            .environmentObject(coordinator)
+            BaseScreen(
+                page: .random,
+                titleTabBar: R.Strings.titleRandom,
+                iconTabBar: R.Icons.iconRandom
+            )
             
-            
-            
-            
-            
-            .tabItem {
-                Label {
-                    R.Strings.titleMovie
-                } icon: {
-                    R.Icons.iconMovie
-                }
-                
-            }
-            
-            NavigationView {
-                Serials()
-            }
-            .tabItem {
-                Label {
-                    R.Strings.titleSerial
-                } icon: {
-                    R.Icons.iconSerial
-                }
-            }
-            
-            NavigationView {
-                Random()
-            }
-            .tabItem {
-                Label {
-                    R.Strings.titleRandom
-                } icon: {
-                    R.Icons.iconRandom
-                }
-            }
-            
-            NavigationView {
-                Favorites()
-            }
-            .tabItem {
-                Label {
-                    R.Strings.titleFavorite
-                } icon: {
-                    R.Icons.iconFavorite
-                }
-                
-            }
-            
+            BaseScreen(
+                page: .favorites,
+                titleTabBar: R.Strings.titleFavorite,
+                iconTabBar: R.Icons.iconFavorite
+            )
         }
         .tint(Color("activeTabBtn"))
+        .environmentObject(coordinator)
         
     }
     
 }
 
 
+struct BaseScreen: View {
+    
+    @EnvironmentObject  var coordinator: Coordinator
+    
+    var page: Page
+    var titleTabBar: Text
+    var iconTabBar: Image
+    
+    var body: some View {
+        
+        NavigationStack(path: $coordinator.path) {
+            coordinator.build(page: page)
+                .navigationDestination(for: Page.self) { page in
+                    coordinator.build(page: page)
+                }
+        }
+        
+        .tabItem {
+            Label {
+                titleTabBar
+            } icon: {
+                iconTabBar
+            }
+            
+        }
+    }
+}

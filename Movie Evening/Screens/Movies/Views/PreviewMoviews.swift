@@ -9,18 +9,16 @@ import SwiftUI
 
 struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     
-    @EnvironmentObject  var coordinator: Coordinator
+    @EnvironmentObject private var coordinator: Coordinator
     @ObservedObject  var viewModel: ViewModel
     
     var columns: [GridItem] = [GridItem(.flexible())]
     
     var body: some View {
         
-        //        VStack {
-        
         List {
             
-            ForEach(viewModel.sections) { section in
+            ForEach(sections) { section in
                 
                 Section(header: SectionHeaderView(title: section.titleSection) {
                     coordinator.push(.allMovies)
@@ -62,14 +60,14 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
         .scrollContentBackground(.hidden)
         .listStyle(.grouped)
         .navigationTitle(R.Strings.titleMovie)
-//        .background(R.Colors.customBackground)
-        
-        //        }
+        .background(R.Colors.customBackground)
         
     }
     
 }
 
-//#Preview {
-//    Movies(coordinator: Coordinator(), viewModel: MovieViewModel())
-//}
+struct PreviewMoviews_Previews: PreviewProvider {
+    static var previews: some View {
+        PreviewMoviews(viewModel: MovieViewModel())
+    }
+}

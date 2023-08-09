@@ -70,6 +70,6 @@ enum R {
     }
     
     enum Colors {
-//        static let customBackground = LinearGradient(colors: [.customDarkPurple, .customBlack, .customPurple], startPoint: .top, endPoint: .bottom)
+        static let customBackground = LinearGradient(colors: [Color("customDarkPurple"), Color("customBlack"), Color("customPurple")], startPoint: .top, endPoint: .bottom)
     }
 }

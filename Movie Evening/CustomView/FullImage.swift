@@ -13,10 +13,6 @@ struct FullImage: View {
     }
 }
 
-//#Preview {
-//    FullImage()
-//}
-
 struct FullImage_Previews: PreviewProvider {
     static var previews: some View {
         FullImage()
