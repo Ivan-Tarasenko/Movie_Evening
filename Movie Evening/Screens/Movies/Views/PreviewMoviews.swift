@@ -12,6 +12,8 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     @EnvironmentObject private var coordinator: Coordinator
     @ObservedObject  var viewModel: ViewModel
     
+    
+    
     var columns: [GridItem] = [GridItem(.flexible())]
     
     var body: some View {

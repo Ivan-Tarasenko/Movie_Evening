@@ -55,6 +55,8 @@ let sections: [SectionModel] = [
 
 final class MovieViewModel: MovieViewModelProtocol {
     
+    var network: Test = Test()
+    
     let mockMovies: [MovieModel] = [
         .init(urlImage: "", name: "Джентельмены", ratingImdb: 8.5, year: 2019),
         .init(urlImage: "", name: "Джентельмены", ratingImdb: 8.5, year: 2019),
