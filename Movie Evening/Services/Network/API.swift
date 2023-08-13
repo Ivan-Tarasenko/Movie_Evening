@@ -11,7 +11,6 @@ import Moya
 enum API {
     case movie(page: Int, genre: String)
     case serial(page: Int, genre: String)
-    case randomMovie
     case detail(movieID: Int)
 }
 
@@ -25,8 +24,6 @@ extension API: TargetType {
         switch self {
         case .movie , .serial:
             Constants.path
-        case .randomMovie:
-            Constants.path + Constants.randomPath
         case .detail(movieID: let movieID):
             Constants.path + String("/") + String(movieID)
         }
@@ -62,8 +59,6 @@ extension API: TargetType {
                 encoding: URLEncoding.default
                 )
             
-        case .randomMovie:
-               return .requestPlain
         case .detail:
             return .requestPlain
         }

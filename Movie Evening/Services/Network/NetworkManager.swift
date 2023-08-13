@@ -11,26 +11,34 @@ import Moya
 protocol Networkable {
     var provider: MoyaProvider<API> { get }
     
-    func fetchMovie(page: Int, genre: String, completion: @escaping (Result<MovieResponse, NetworkError>) -> Void)
+    func fetchMovie(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void)
     
-    func fetchDetailMovie(movieID: Int, completion: @escaping (Result<DetailMovieResponse, NetworkError>) -> Void)
+    func fetchSerial(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void)
     
-    func fetchDetailSeril(serialID: Int, completion: @escaping (Result<DetailSerialResponse, NetworkError>) -> Void)
+    func fetchDetail(for ID: Int, completion: @escaping (Result<DetailResponse, NetworkError>) -> Void)
+    
+    func fenchRandomFilm(completion: @escaping (Result<DetailResponse, NetworkError>) -> Void)
 }
 
 final class NetworkManager: Networkable {
     var provider = MoyaProvider<API>(plugins: [NetworkLoggerPlugin()])
     
-    func fetchMovie(page: Int, genre: String, completion: @escaping (Result<MovieResponse, NetworkError>) -> Void) {
+    func fetchMovie(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
         provider.makeRequest(.movie(page: page, genre: genre), completion: completion)
     }
     
-    func fetchDetailMovie(movieID: Int, completion: @escaping (Result<DetailMovieResponse, NetworkError>) -> Void) {
-        provider.makeRequest(.detail(movieID: movieID), completion: completion)
+    func fetchSerial(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
+        provider.makeRequest(.serial(page: page, genre: genre), completion: completion)
     }
     
-    func fetchDetailSeril(serialID: Int, completion: @escaping (Result<DetailSerialResponse, NetworkError>) -> Void) {
-        provider.makeRequest(.detail(movieID: serialID), completion: completion)
+    func fetchDetail(for ID: Int, completion: @escaping (Result<DetailResponse, NetworkError>) -> Void) {
+        provider.makeRequest(.detail(movieID: ID), completion: completion)
+    }
+    
+    func fenchRandomFilm(completion: @escaping (Result<DetailResponse, NetworkError>) -> Void) {
+        let intRandom = Int.random(in: 1...1000099)
+        print(intRandom)
+        provider.makeRequest(.detail(movieID: intRandom), completion: completion)
     }
     
     

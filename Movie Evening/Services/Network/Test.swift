@@ -16,13 +16,8 @@ class Test {
         }
     }
     
-    var testDetailMovie: DetailMovieResponse? {
-        didSet {
-            print(testDetailMovie?.name)
-        }
-    }
-    
-    var testDetailSerial: DetailSerialResponse? {
+  
+    var testDetailSerial: DetailResponse? {
         didSet {
             print(testDetailSerial?.name)
         }
@@ -30,7 +25,7 @@ class Test {
     
     init() {
 //        testFetch()
-        testDetailFilm()
+        testRandom()
 //        getDetailSerial()
     }
     
@@ -45,22 +40,23 @@ class Test {
         }
     }
     
-    func testDetailFilm() {
-        network.fetchDetailMovie(movieID: 535341) { result in
+   
+    func getDetailSerial() {
+        network.fetchDetail(for: 3433) { result in
             switch result {
             case .success(let success):
-                self.testDetailMovie = success
+                self.testDetailSerial = success
             case .failure(let failure):
                 print(failure)
             }
         }
     }
     
-    func getDetailSerial() {
-        network.fetchDetailSeril(serialID: 1120247) { result in
+    func testRandom() {
+        network.fenchRandomFilm { result in
             switch result {
             case .success(let success):
-                self.testDetailSerial = success
+                print(success.name)
             case .failure(let failure):
                 print(failure)
             }
