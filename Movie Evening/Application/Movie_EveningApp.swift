@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct Movie_EveningApp: App {
 
     var body: some Scene {
+        
         WindowGroup {
-            ContentView()
+           TabBar()
         }
-        .modelContainer(for: Item.self)
     }
 }
+
