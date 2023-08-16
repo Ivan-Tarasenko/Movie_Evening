@@ -81,16 +81,6 @@ final class Coordinator: ObservableObject {
     }
     
     @ViewBuilder
-    func build(sheet: Sheet) -> some View {
-        switch sheet {
-        case .fullIamge:
-            NavigationStack {
-                FullImage()
-            }
-        }
-    }
-    
-    @ViewBuilder
     func build(fullScreenCover: FullScreenCover) -> some View {
         switch fullScreenCover {
         case .detailAboutFilm:

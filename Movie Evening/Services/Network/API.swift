@@ -12,6 +12,8 @@ enum API {
     case movie(page: Int, genre: String)
     case serial(page: Int, genre: String)
     case detail(movieID: Int)
+    case top10
+    case top250(page: Int)
 }
 
 extension API: TargetType {
@@ -22,7 +24,7 @@ extension API: TargetType {
     
     var path: String {
         switch self {
-        case .movie , .serial:
+        case .movie , .serial, .top10, .top250:
             Constants.path
         case .detail(movieID: let movieID):
             Constants.path + String("/") + String(movieID)
@@ -58,6 +60,24 @@ extension API: TargetType {
                 
                 encoding: URLEncoding.default
                 )
+            
+        case .top250(let page):
+            return .requestParameters(
+                parameters: [
+                    "page": page,
+                    "limit": "10",
+                    "top250": "",
+                            ],
+                
+                encoding: URLEncoding.default
+                )
+            
+        case .top10:
+            return .requestParameters(
+                parameters: ["top10" : ""],
+                
+                encoding: URLEncoding.default
+            )
             
         case .detail:
             return .requestPlain
