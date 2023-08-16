@@ -24,16 +24,9 @@ struct DetailAboutFilm: View {
             })
             
             Image("360")
-                .onTapGesture {
-                    coordinator.dismissSheet()
-                    coordinator.present(sheet: .fullIamge)
-                }
             
             Text("DetailView")
         }
-        .sheet(item: $coordinator.sheet) { sheet in
-                     coordinator.build(sheet: sheet)
-                 }
     }
 }
 

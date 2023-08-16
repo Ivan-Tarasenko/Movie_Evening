@@ -12,7 +12,7 @@ class Test {
     
     var testMovies: [Doc]  = [] {
         didSet {
-            print(testMovies[0].name)
+            print(testMovies.count)
         }
     }
     
@@ -25,8 +25,9 @@ class Test {
     
     init() {
 //        testFetch()
-        testRandom()
+//        testRandom()
 //        getDetailSerial()
+        fetchTop250()
     }
     
     func testFetch() {
@@ -52,11 +53,11 @@ class Test {
         }
     }
     
-    func testRandom() {
-        network.fenchRandomFilm { result in
+    func fetchTop250() {
+        network.fetchTop250(page: 1) { result in
             switch result {
             case .success(let success):
-                print(success.name)
+                print(success.docs.count)
             case .failure(let failure):
                 print(failure)
             }

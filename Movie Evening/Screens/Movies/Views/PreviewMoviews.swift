@@ -40,7 +40,6 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                                 )
                                 .frame(width: 170, height: 300)
                                 .onTapGesture {
-                                    coordinator.dismissFullCover()
                                     coordinator.present(fullScreenCover: .detailAboutFilm)
                                 }
                                 

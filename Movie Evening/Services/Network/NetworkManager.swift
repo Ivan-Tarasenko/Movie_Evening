@@ -16,13 +16,11 @@ protocol Networkable {
     func fetchSerial(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void)
     
     func fetchDetail(for ID: Int, completion: @escaping (Result<DetailResponse, NetworkError>) -> Void)
-    
-    func fenchRandomFilm(completion: @escaping (Result<DetailResponse, NetworkError>) -> Void)
 }
 
 final class NetworkManager: Networkable {
     var provider = MoyaProvider<API>(plugins: [NetworkLoggerPlugin()])
-    
+
     func fetchMovie(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
         provider.makeRequest(.movie(page: page, genre: genre), completion: completion)
     }
@@ -35,11 +33,11 @@ final class NetworkManager: Networkable {
         provider.makeRequest(.detail(movieID: ID), completion: completion)
     }
     
-    func fenchRandomFilm(completion: @escaping (Result<DetailResponse, NetworkError>) -> Void) {
-        let intRandom = Int.random(in: 1...1000099)
-        print(intRandom)
-        provider.makeRequest(.detail(movieID: intRandom), completion: completion)
+    func fenchTop10(completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
+        provider.makeRequest(.top10, completion: completion)
     }
     
-    
+    func fetchTop250(page: Int, comletion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
+        provider.makeRequest(.top250(page: page), completion: comletion)
+    }
 }
