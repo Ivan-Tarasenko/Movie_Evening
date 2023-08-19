@@ -76,8 +76,13 @@ final class MovieViewModel: MovieViewModelProtocol {
                     dataFilm.rating = film.rating.imdb
                     dataFilm.year = Int16(film.year)
                     
-                    CoreDataManager.shared.save()
-                    count += 1
+                    if dataFilm.name == "" || dataFilm.name == nil {
+                        return
+                    } else {
+                        CoreDataManager.shared.save()
+                        count += 1
+                    }
+                    
                 }
                 
             }
