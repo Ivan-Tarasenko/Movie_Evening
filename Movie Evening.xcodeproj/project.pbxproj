@@ -47,6 +47,7 @@
 		B544CB2E2A8D32E30093F5FF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B544CB2D2A8D32E30093F5FF /* CoreDataManager.swift */; };
 		B544CB312A8D33700093F5FF /* MovieEveningDataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B544CB2F2A8D33700093F5FF /* MovieEveningDataBase.xcdatamodeld */; };
 		B544CB332A8D3D190093F5FF /* CoreDataPreviewFilmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B544CB322A8D3D190093F5FF /* CoreDataPreviewFilmModel.swift */; };
+		B544CB352A914EEA0093F5FF /* AllFilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B544CB342A914EEA0093F5FF /* AllFilmsModel.swift */; };
 		D4991C794749F49925F9699C /* Pods_Movie_EveningTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FE2613E25843D6ED0588A0 /* Pods_Movie_EveningTests.framework */; };
 		DDE949A320FE9C042E7346DA /* Pods_Movie_Evening.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83983F2D6393794FA6094A2B /* Pods_Movie_Evening.framework */; };
 /* End PBXBuildFile section */
@@ -121,6 +122,7 @@
 		B544CB2D2A8D32E30093F5FF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B544CB302A8D33700093F5FF /* MovieEveningDataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieEveningDataBase.xcdatamodel; sourceTree = "<group>"; };
 		B544CB322A8D3D190093F5FF /* CoreDataPreviewFilmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPreviewFilmModel.swift; sourceTree = "<group>"; };
+		B544CB342A914EEA0093F5FF /* AllFilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilmsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				1A6F08B12A6AB6AC001BDF8B /* MovieViewModel.swift */,
+				B544CB342A914EEA0093F5FF /* AllFilmsModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				1A4FD6E52A888AC600710E66 /* DetailResponse.swift in Sources */,
 				1A6F08B22A6AB6AC001BDF8B /* MovieViewModel.swift in Sources */,
 				1A6F08B52A6AC370001BDF8B /* CardMovie.swift in Sources */,
+				B544CB352A914EEA0093F5FF /* AllFilmsModel.swift in Sources */,
 				B544CB332A8D3D190093F5FF /* CoreDataPreviewFilmModel.swift in Sources */,
 				1A946C052A867650003C6AC9 /* Constants.swift in Sources */,
 				1ADF66262A63F0D9002119DD /* Random.swift in Sources */,

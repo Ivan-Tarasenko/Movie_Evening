@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
+struct AllMovies<ViewModel: AllFilmsModelProtocol>: View {
     
     @EnvironmentObject  var coordinator: Coordinator
     @ObservedObject var viewModel: ViewModel
@@ -45,6 +45,6 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
 
 struct AllMovies_Previews: PreviewProvider {
     static var previews: some View {
-        AllMovies(viewModel: MovieViewModel())
+        AllMovies(viewModel: AllFilmsModel())
     }
 }

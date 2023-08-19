@@ -74,7 +74,7 @@ final class Coordinator: ObservableObject {
         case .favorites:
             Favorites()
         case .allMovies:
-            AllMovies(viewModel: MovieViewModel())
+            AllMovies(viewModel: AllFilmsModel())
         case .allSerials:
             AllSerials()
         }
