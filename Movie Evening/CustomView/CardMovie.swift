@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CardMovie: View {
     
@@ -18,7 +19,8 @@ struct CardMovie: View {
         
         ZStack {
             VStack(alignment: .leading) {
-                Image(urlImage, bundle: nil)
+                KFImage(URL(string: urlImage))
+//                Image(urlImage, bundle: nil)
                     .resizable()
                     .cornerRadius(19)
                 

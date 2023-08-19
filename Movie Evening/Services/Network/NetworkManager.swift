@@ -20,7 +20,7 @@ protocol Networkable {
 
 final class NetworkManager: Networkable {
     var provider = MoyaProvider<API>(plugins: [NetworkLoggerPlugin()])
-
+    
     func fetchMovie(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
         provider.makeRequest(.movie(page: page, genre: genre), completion: completion)
     }

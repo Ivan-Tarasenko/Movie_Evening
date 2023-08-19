@@ -19,7 +19,7 @@ class Test {
   
     var testDetailSerial: DetailResponse? {
         didSet {
-            print(testDetailSerial?.name)
+            print(testDetailSerial?.name as Any)
         }
     }
     

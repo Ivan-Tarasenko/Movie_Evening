@@ -25,9 +25,9 @@ extension API: TargetType {
     var path: String {
         switch self {
         case .movie , .serial, .top10, .top250:
-            Constants.path
+            return Constants.path
         case .detail(movieID: let movieID):
-            Constants.path + String("/") + String(movieID)
+            return Constants.path + String("/") + String(movieID)
         }
     }
     
