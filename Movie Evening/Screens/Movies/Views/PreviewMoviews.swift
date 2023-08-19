@@ -27,15 +27,14 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                     ScrollView(.horizontal) {
                         
                         LazyHGrid(rows: columns) {
-                            
-                            ForEach(viewModel.tasks, id: \.self) { movie in
+                            ForEach(0..<5) { index in
                                 
-                                CardMovie(
-                                    urlImage: movie.poster,
-                                    name: movie.name,
-                                    rating: movie.rating,
-                                    year: movie.year
-                                )
+                            CardMovie(
+                                urlImage: viewModel.tasks[index].poster,
+                                name: viewModel.tasks[index].name,
+                                rating: viewModel.tasks[index].rating,
+                                year: viewModel.tasks[index].year
+                            )
                                 .frame(width: 170, height: 300)
                                 .onTapGesture {
                                     coordinator.present(fullScreenCover: .detailAboutFilm)

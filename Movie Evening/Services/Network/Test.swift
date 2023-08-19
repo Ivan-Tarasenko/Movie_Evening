@@ -31,7 +31,7 @@ class Test {
     }
     
     func testFetch() {
-        network.fetchMovie(page: 1, genre: "ужасы") { result in
+        network.fetchMovie(page: 1, genre: .horrors) { result in
             switch result {
             case .success(let success):
                 self.testMovies = success.docs

@@ -43,7 +43,7 @@ final class MovieViewModel: MovieViewModelProtocol {
     
     func getfilms() {
         
-        shared.fetchMovie(page: 1, genre: "ужасы") { result in
+        shared.fetchMovie(page: 1, genre: .actionMovie) { result in
             switch result {
             case .success(let response):
                 print("++ \(response.docs )")
