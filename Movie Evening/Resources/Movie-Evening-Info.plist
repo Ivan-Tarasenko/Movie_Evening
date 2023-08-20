@@ -6,9 +6,8 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Karma-SemiBold.ttf</string>
-		<string>Roboto-Light.ttf</string>
-		<string>Roboto-Regular.ttf</string>
+		<string>Inter-ExtraLight.otf</string>
+		<string>Inter-Light.otf</string>
 	</array>
 </dict>
 </plist>

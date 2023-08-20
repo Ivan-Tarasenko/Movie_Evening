@@ -18,31 +18,77 @@ struct CardMovie: View {
     var body: some View {
         
         ZStack {
-            VStack(alignment: .leading) {
+            VStack(spacing: 3) {
                 KFImage(URL(string: urlImage))
-//                Image(urlImage, bundle: nil)
                     .resizable()
-                    .cornerRadius(19)
+                    .clipShape(.rect(cornerRadius:14))
+                    .frame(width: 152, height: 208)
                 
-                VStack(alignment: .leading) {
-                    Text(name)
-                    Text("IMDb: \(String(rating))")
-                    Text("Yesr: \(String(year))")
+                HStack {
+                    Text("Avatar")
+                        .font(.custom(R.Fonts.interLight, size: 16))
+                    Spacer()
+                    Text("2019")
+                        .font(.custom(R.Fonts.interExtraLight, size: 14))
                 }
-                .font(.custom(R.Fonts.robotoLight, size: 16))
+                .frame(width: 152)
                 
+                StarRating(viewModel: ViewModel())
                 
             }
             .padding(10)
+            .frame(width: 161, height: 254)
+            .background(R.Colors.cardBackground)
+            .clipShape(.rect(cornerRadius: 18))
+            .borderWithGradient(R.Colors.borderBackground, width: 2, cornerRadius: 20)
         }
-        .background(Color("backgroundMovieItem"))
-        .cornerRadius(19)
-        
     }
 }
 
 struct CardMovie_Previews: PreviewProvider {
     static var previews: some View {
         CardMovie(urlImage: "", name: "", rating: 0.0, year: 0)
+    }
+}
+
+
+
+struct StarRating<ViewModel: ViewModelProtocol>: View {
+
+    @ObservedObject var viewModel: ViewModel
+    
+    var body: some View {
+        
+        HStack(spacing: 3) {
+            ForEach(Array(viewModel.arrayRatingValues.enumerated()), id: \.element.self) {_, value in
+                
+                StarView(fillValue: value)
+                
+            }
+            .frame(width:11, height: 11)
+        }
+    }
+}
+
+
+struct StarView: View {
+    var fillValue: Double
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .fill(Color.starInactive)
+                Rectangle()
+                    .fill(Color.active)
+                    .frame(width: geometry.size.width * fillValue)
+            }
+        }
+        .mask(
+            Image("star")
+                .resizable()
+            
+        )
+        .aspectRatio(1, contentMode: .fit)
     }
 }

@@ -62,9 +62,8 @@ enum R {
     }
     
     enum Fonts {
-        static let robotoRegular = "Roboto-Regular"
-        static let robotoLight = "Roboto-Light"
-        static let karmaSemiBold = "Karma-SemiBold"
+        static let interExtraLight = "Inter-ExtraLight"
+        static let interLight = "Inter-Light"
     }
     
     enum BoundsScreen {
@@ -73,7 +72,25 @@ enum R {
     }
     
     enum Colors {
-        static let customBackground = LinearGradient(colors: [Color("customDarkPurple"), Color("customBlack"), Color("customPurple")], startPoint: .top, endPoint: .bottom)
+        static let cardBackground = LinearGradient(
+            stops: [
+                Gradient.Stop(color: Color("CardColor2"), location: 0.00),
+                Gradient.Stop(color: Color("CardColor1"), location: 1.00),
+            ],
+            startPoint: UnitPoint(x: 0.5, y: 0),
+            endPoint: UnitPoint(x: 0.5, y: 0.96)
+        )
+        
+        static let borderBackground = LinearGradient(
+            stops: [
+                Gradient.Stop(color: Color("BorderColor1"), location: 0.00),
+                Gradient.Stop(color: Color("BorderColor2"), location: 1.00),
+            ],
+            startPoint: UnitPoint(x: 0.5, y: 0),
+            endPoint: UnitPoint(x: 0.5, y: 0.96)
+        )
+        
+        static let MainBackground = Color(.black)
     }
 }
 

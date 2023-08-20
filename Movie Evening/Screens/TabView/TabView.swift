@@ -39,7 +39,7 @@ struct TabBar: View {
                 iconTabBar: R.Icons.iconFavorite
             )
         }
-        .tint(Color("activeTabBtn"))
+        .tint(Color.active)
         .environmentObject(coordinator)
         
     }

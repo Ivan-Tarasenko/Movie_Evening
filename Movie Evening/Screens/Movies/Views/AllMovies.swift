@@ -36,7 +36,7 @@ struct AllMovies<ViewModel: AllFilmsModelProtocol>: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(R.Colors.customBackground)
+//        .background(R.Colors.MainBackground)
         .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
             coordinator.build(fullScreenCover: .detailAboutFilm)
         }

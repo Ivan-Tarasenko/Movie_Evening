@@ -8,6 +8,10 @@
 import SwiftUI
 
 extension View {
+    func borderWithGradient(_ color: LinearGradient, width: CGFloat, cornerRadius: CGFloat) -> some View {
+        overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(color, lineWidth: width))
+    }
+    
     func border(_ color: Color, width: CGFloat, cornerRadius: CGFloat) -> some View {
         overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(color, lineWidth: width))
     }

@@ -27,7 +27,7 @@ class Test {
 //        testFetch()
 //        testRandom()
 //        getDetailSerial()
-        fetchTop250()
+//        fetchTop250()
     }
     
     func testFetch() {
