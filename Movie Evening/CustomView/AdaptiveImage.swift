@@ -15,8 +15,10 @@ struct AdaptiveImage: View {
     @ViewBuilder var body: some View {
         if colorScheme == .light {
             light
+                .scaledToFill()
         } else {
             dark
+                .scaledToFill()
         }
     }
 }

@@ -12,8 +12,22 @@ struct Search<ViewModel: MovieViewModelProtocol>: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-    
+        HStack {
             SearchView(viewModel: MovieViewModel())
+            
+            ConfigButton {
+                print("configureTap")
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: 150)
+        .background(
+            LinearGradient(
+                            gradient: Gradient(colors: [Color.clear, Color.black]),
+                            startPoint: .bottom,
+                            endPoint: .top
+                        )
+                        .opacity(0.8) 
+        )
     }
 }
 
@@ -23,6 +37,31 @@ struct Search_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Components Search
+
+// MARK: - ConfigButton
+struct ConfigButton: View {
+    
+    var action: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .frame(width: 45)
+                .foregroundStyle(Color.searchColor)
+                .borderWithGradient(R.Colors.borderSearchGradient, width: 1, cornerRadius: 23)
+                .padding(.horizontal, 5)
+            
+            Button(action: action) {
+                Image(systemName: "slider.horizontal.3")
+                    .foregroundStyle(Color.active)
+                    .font(.system(size: 27))
+            }
+        }
+    }
+}
+
+// MARK: - SearchView
 struct SearchView<ViewModel: MovieViewModelProtocol>: View {
     
     @ObservedObject var viewModel: ViewModel
@@ -31,23 +70,21 @@ struct SearchView<ViewModel: MovieViewModelProtocol>: View {
         ZStack(alignment: .trailing) {
             
             TextField("  Search...", text: $viewModel.searchText)
-                .frame(width: viewModel.isSearch ? R.BoundsScreen.widthScreen - 65 : 45)
-                .frame(height: 45)
-                .background(Color("searchColor"))
+                .frame(width: R.BoundsScreen.widthScreen - 80, height: 45)
+                .background(Color.searchColor)
                 .cornerRadius(23)
+                .borderWithGradient(R.Colors.borderSearchGradient, width: 1, cornerRadius: 23)
             
             SearchButton() {
-                withAnimation {
-                    viewModel.isSearch.toggle()
-                }
+                
             }
            
         }
-        .padding(.bottom, 5)
-        .padding(.trailing, 30)
+
     }
 }
 
+// MARK: - SearchButton
 struct SearchButton: View {
     
     var action: () -> Void
@@ -56,11 +93,12 @@ struct SearchButton: View {
         ZStack {
             Circle()
                 .frame(width: 45)
-                .foregroundStyle(Color("searchColor"))
+                .foregroundStyle(Color.searchColor)
             
             Button(action: action) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(Color("headerSection"))
+                    .foregroundStyle(Color.MagnifyingglassColor)
+                    .font(.system(size: 27))
             }
         }
     }
