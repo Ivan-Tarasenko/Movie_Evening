@@ -12,8 +12,6 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     @EnvironmentObject private var coordinator: Coordinator
     @ObservedObject  var viewModel: ViewModel
     
-    
-    
     var columns: [GridItem] = [GridItem(.flexible())]
     
     var body: some View {
@@ -30,18 +28,20 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                         
                         LazyHGrid(rows: columns) {
                             
-                            ForEach(viewModel.mockMovies) { movie in
-                                
-                                CardMovie(
-                                    urlImage: "360",
-                                    name: movie.name,
-                                    rating: movie.ratingImdb,
-                                    year: movie.year
-                                )
-                                .frame(width: 170, height: 300)
-                                .onTapGesture {
-                                    coordinator.present(fullScreenCover: .detailAboutFilm)
+                            ForEach(Array(viewModel.tasks.enumerated()), id: \.element.self) {index, movie in
+                                if index <= 4 {
+                                    CardMovie(
+                                        urlImage: movie.poster,
+                                        name: movie.name,
+                                        rating: movie.rating,
+                                        year: movie.year
+                                    )
+                                    .frame(width: 170, height: 300)
+                                    .onTapGesture {
+                                        coordinator.present(fullScreenCover: .detailAboutFilm)
+                                    }
                                 }
+                                
                                 
                             }
                             

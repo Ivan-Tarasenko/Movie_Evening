@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
+struct AllMovies<ViewModel: AllFilmsModelProtocol>: View {
     
     @EnvironmentObject  var coordinator: Coordinator
     @ObservedObject var viewModel: ViewModel
@@ -18,12 +18,12 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
         
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(viewModel.mockMovies) { movie in
+                ForEach(viewModel.tasks, id: \.self) {movie in
                     
                     CardMovie(
-                        urlImage: "360",
+                        urlImage: movie.poster,
                         name: movie.name,
-                        rating: movie.ratingImdb,
+                        rating: movie.rating,
                         year: movie.year
                     )
                     .frame(width: 170, height: 300)
@@ -45,6 +45,6 @@ struct AllMovies<ViewModel: MovieViewModelProtocol>: View {
 
 struct AllMovies_Previews: PreviewProvider {
     static var previews: some View {
-        AllMovies(viewModel: MovieViewModel())
+        AllMovies(viewModel: AllFilmsModel())
     }
 }

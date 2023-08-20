@@ -1,14 +1,13 @@
 //
-//  MovieViewModel.swift
+//  AllFilmsModel.swift
 //  Movie Evening
 //
-//  Created by Иван Тарасенко on 21.07.2023.
+//  Created by Ruslan Ismailov on 20/08/23.
 //
 
 import Foundation
-import CoreData
 
-protocol MovieViewModelProtocol: ObservableObject {
+protocol AllFilmsModelProtocol: ObservableObject {
     
     var searchText: String { get set }
     
@@ -18,7 +17,7 @@ protocol MovieViewModelProtocol: ObservableObject {
     
 }
 
-final class MovieViewModel: MovieViewModelProtocol {
+class AllFilmsModel: AllFilmsModelProtocol {
     
     @Published var searchText: String = ""
     
@@ -35,7 +34,6 @@ final class MovieViewModel: MovieViewModelProtocol {
     let queue = DispatchQueue(label: "com.movieevening.app", qos: .background)
     
     init() {
-        
         if tasks.count == 0 {
             getfilms()
         }
@@ -53,14 +51,8 @@ final class MovieViewModel: MovieViewModelProtocol {
             }
         }
     }
-
-//    func getAllTasks() {
-//        tasks = CoreDataManager.shared.getAllTasks().map(CoreDataPreviewFilmModel.init)
-//
-//
-//    }
-
-    func save(data: PreviewFilmResponse) {
+    
+    private func save(data: PreviewFilmResponse) {
         queue.async {
             var count: Int = 0
             
@@ -75,20 +67,9 @@ final class MovieViewModel: MovieViewModelProtocol {
                     dataFilm.poster = film.poster.previewURL
                     dataFilm.rating = film.rating.imdb
                     dataFilm.year = Int16(film.year)
-                    
-                    if dataFilm.name == "" || dataFilm.name == nil {
-                        return
-                    } else {
-                        CoreDataManager.shared.save()
-                        count += 1
-                    }
-                    
+                    CoreDataManager.shared.save()
+                    count += 1
                 }
-                
-            }
-            
-            if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                print("++ Data base in: \(documentsDirectory)")
             }
             if count > 0 {
                 DispatchQueue.main.async {
@@ -96,6 +77,5 @@ final class MovieViewModel: MovieViewModelProtocol {
                 }
             }
         }
-        
     }
 }

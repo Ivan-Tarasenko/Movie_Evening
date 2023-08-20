@@ -11,22 +11,22 @@ import Moya
 protocol Networkable {
     var provider: MoyaProvider<API> { get }
     
-    func fetchMovie(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void)
+    func fetchMovie(page: Int, genre: AllGenres, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void)
     
-    func fetchSerial(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void)
+    func fetchSerial(page: Int, genre: AllGenres, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void)
     
     func fetchDetail(for ID: Int, completion: @escaping (Result<DetailResponse, NetworkError>) -> Void)
 }
 
 final class NetworkManager: Networkable {
     var provider = MoyaProvider<API>(plugins: [NetworkLoggerPlugin()])
-
-    func fetchMovie(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
-        provider.makeRequest(.movie(page: page, genre: genre), completion: completion)
+    
+    func fetchMovie(page: Int, genre: AllGenres, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
+        provider.makeRequest(.movie(page: page, genre: genre.rawValue), completion: completion)
     }
     
-    func fetchSerial(page: Int, genre: String, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
-        provider.makeRequest(.serial(page: page, genre: genre), completion: completion)
+    func fetchSerial(page: Int, genre: AllGenres, completion: @escaping (Result<PreviewFilmResponse, NetworkError>) -> Void) {
+        provider.makeRequest(.serial(page: page, genre: genre.rawValue), completion: completion)
     }
     
     func fetchDetail(for ID: Int, completion: @escaping (Result<DetailResponse, NetworkError>) -> Void) {
