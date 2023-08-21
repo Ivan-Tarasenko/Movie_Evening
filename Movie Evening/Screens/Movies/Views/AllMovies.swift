@@ -16,29 +16,36 @@ struct AllMovies<ViewModel: AllFilmsModelProtocol>: View {
     
     var body: some View {
         
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(viewModel.tasks, id: \.self) {movie in
-                    
-                    CardMovie(
-                        urlImage: movie.poster,
-                        name: movie.name,
-                        rating: movie.rating,
-                        year: movie.year
-                    )
-                    .frame(width: 170, height: 300)
-                    .onTapGesture {
-                        coordinator.dismissFullCover()
-                        coordinator.present(fullScreenCover: .detailAboutFilm)
+        ZStack {
+            
+            AdaptiveImage(
+                light: R.Colors.backgtoundLightImage,
+                dark: R.Colors.backgroundDarkImage
+            )
+            
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(viewModel.tasks, id: \.self) {movie in
+                        
+                        CardMovie(
+                            urlImage: movie.poster,
+                            name: movie.name,
+                            rating: movie.rating,
+                            year: movie.year
+                        )
+                        .frame(width: 170, height: 300)
+                        .onTapGesture {
+                            coordinator.dismissFullCover()
+                            coordinator.present(fullScreenCover: .detailAboutFilm)
+                        }
+                        
                     }
-                    
                 }
             }
-        }
-        .scrollContentBackground(.hidden)
-//        .background(R.Colors.MainBackground)
-        .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
-            coordinator.build(fullScreenCover: .detailAboutFilm)
+            .scrollContentBackground(.hidden)
+            .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
+                coordinator.build(fullScreenCover: .detailAboutFilm)
+            }
         }
     }
 }

@@ -58,20 +58,19 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                             }
                             
                         }
-                        .listRowInsets(EdgeInsets(top: -20, leading: 25, bottom: -10, trailing: 0))
+//                        .listRowInsets(EdgeInsets(top: -20, leading: 25, bottom: -10, trailing: 0))
                         .scrollIndicators(.hidden)
                         .headerProminence(.increased)
                         
                     }
-                    .listRowInsets(
-                        sectionIndex == 0 ?
-                        EdgeInsets(top: 150, leading: 25, bottom: 10, trailing: 0) :
-                            EdgeInsets(top: -20, leading: 25, bottom: -10, trailing: 0)
-                    )
+//                    .listRowInsets(
+//                        sectionIndex == 0 ?
+//                        EdgeInsets(top: 150, leading: 25, bottom: 10, trailing: 0) :
+//                            EdgeInsets(top: -20, leading: 25, bottom: -10, trailing: 0)
+//                    )
                     
                 }
                 .listRowBackground(Color.clear)
-                .navigationTitle(R.Strings.titleMovie)
                 .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
                     coordinator.build(fullScreenCover: .detailAboutFilm)
                 }
@@ -79,9 +78,14 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
             }
             .scrollContentBackground(.hidden)
             .overlay(alignment: .top) {
-                Search(viewModel: viewModel)
+                SearchView(viewModel: viewModel)
             }
+            
         }
+        .onTapGesture {
+            hideKeyboard()
+        }
+        .ignoresSafeArea(.keyboard)
         
     }
     
@@ -92,3 +96,5 @@ struct PreviewMoviews_Previews: PreviewProvider {
         PreviewMoviews(viewModel: MovieViewModel())
     }
 }
+
+

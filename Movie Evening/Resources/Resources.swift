@@ -99,6 +99,12 @@ enum R {
             endPoint: UnitPoint(x: 0.7, y: 0.96)
         )
         
+        static let darkeningGradient =  LinearGradient(
+            gradient: Gradient(colors: [Color.clear, Color.black]),
+            startPoint: .bottom,
+            endPoint: .top
+        )
+        
         static let backgroundDarkImage = Image("BackgroundDark")
         static let backgtoundLightImage = Image("BackgroundLight")
     }
