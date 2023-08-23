@@ -15,13 +15,6 @@ struct AllMovies<ViewModel: AllFilmsModelProtocol>: View {
     var columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        
-        ZStack {
-            
-            AdaptiveImage(
-                light: R.Colors.backgtoundLightImage,
-                dark: R.Colors.backgroundDarkImage
-            )
             
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
@@ -43,10 +36,16 @@ struct AllMovies<ViewModel: AllFilmsModelProtocol>: View {
                 }
             }
             .scrollContentBackground(.hidden)
+            .background(
+                AdaptiveImage(
+                    light: R.Colors.backgtoundLightImage,
+                    dark: R.Colors.backgroundDarkImage
+                )
+            )
             .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
                 coordinator.build(fullScreenCover: .detailAboutFilm)
             }
-        }
+        
     }
 }
 

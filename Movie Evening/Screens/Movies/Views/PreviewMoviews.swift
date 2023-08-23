@@ -15,13 +15,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     var columns: [GridItem] = [GridItem(.flexible())]
     
     var body: some View {
-        ZStack {
-            
-            AdaptiveImage(
-                light: R.Colors.backgtoundLightImage,
-                dark: R.Colors.backgroundDarkImage
-            )
-            
+        
             List {
                 
                 ForEach(sections.indices, id: \.self) { sectionIndex in
@@ -31,7 +25,6 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                     Section(header: SectionHeaderView(title: section.titleSection) {
                         coordinator.push(.allMovies)
                     }) {
-                        
                         
                         ScrollView(.horizontal) {
                             
@@ -58,16 +51,16 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                             }
                             
                         }
-//                        .listRowInsets(EdgeInsets(top: -20, leading: 25, bottom: -10, trailing: 0))
+                        .listRowInsets(EdgeInsets(top: -20, leading: 10, bottom: -10, trailing: 0))
                         .scrollIndicators(.hidden)
                         .headerProminence(.increased)
                         
                     }
-//                    .listRowInsets(
-//                        sectionIndex == 0 ?
-//                        EdgeInsets(top: 150, leading: 25, bottom: 10, trailing: 0) :
-//                            EdgeInsets(top: -20, leading: 25, bottom: -10, trailing: 0)
-//                    )
+                    .listRowInsets(
+                        sectionIndex == 0 ?
+                        EdgeInsets(top: 150, leading: 10, bottom: 10, trailing: 0) :
+                            EdgeInsets(top: -20, leading: 10, bottom: -10, trailing: 0)
+                    )
                     
                 }
                 .listRowBackground(Color.clear)
@@ -76,16 +69,18 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                 }
                 
             }
+            .listStyle(.grouped)
             .scrollContentBackground(.hidden)
             .overlay(alignment: .top) {
                 SearchView(viewModel: viewModel)
             }
-            
-        }
-        .onTapGesture {
-            hideKeyboard()
-        }
-        .ignoresSafeArea(.keyboard)
+            .onTapGesture {
+                hideKeyboard()
+            }
+            .background(AdaptiveImage(
+                light: R.Colors.backgtoundLightImage,
+                dark: R.Colors.backgroundDarkImage
+            ))
         
     }
     

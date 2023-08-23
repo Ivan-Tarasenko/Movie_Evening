@@ -25,6 +25,6 @@ struct SectionHeaderView: View {
                     .foregroundColor(Color.subtext)
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 15)
     }
 }
