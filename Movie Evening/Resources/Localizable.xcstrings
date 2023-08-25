@@ -11,9 +11,6 @@
         }
       }
     },
-    "2019" : {
-
-    },
     "Action Movie" : {
 
     },
@@ -59,9 +56,6 @@
           }
         }
       }
-    },
-    "Avatar" : {
-
     },
     "Biographies" : {
       "localizations" : {
@@ -918,6 +912,9 @@
           }
         }
       }
+    },
+    "Sort by" : {
+
     },
     "Sports" : {
       "localizations" : {

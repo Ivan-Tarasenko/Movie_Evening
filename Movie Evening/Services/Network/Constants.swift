@@ -10,7 +10,9 @@ import Foundation
 enum Constants {
     static let baseURL = "https://api.kinopoisk.dev/v1.3/"
     static let path = "movie"
-    static let apiKey = "73RGG0S-NPBM7JF-G735BVT-01XY53G"
+//    static let apiKey = "73RGG0S-NPBM7JF-G735BVT-01XY53G"
+    static let apiKey = "P61F8Q7-P6T4AY8-KQYYAQ8-W5DEH32"
+    
     static let requestedGenres = ["комедия", "мультфильм", "ужасы", "приключения", "боевик", "фантастика", "триллер", "мелодрама", "детектив", "фэнтези", "военный", "семейный", "аниме", "история", "драма", "документальный", "детский", "криминал", "биография", "вестерн", "фильм-нуар", "спорт", "мюзикл", "ток-шоу", "игра"]
 }
 

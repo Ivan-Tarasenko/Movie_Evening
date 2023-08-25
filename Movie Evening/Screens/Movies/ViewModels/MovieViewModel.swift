@@ -16,6 +16,10 @@ protocol MovieViewModelProtocol: ObservableObject {
     
     var tasks: [CoreDataPreviewFilmModel] { get set }
     
+    func sendIdToDetailFilm(id: Int)
+    
+    func sendDataToAllFilms(tasks: [CoreDataPreviewFilmModel]) 
+    
 }
 
 final class MovieViewModel: MovieViewModelProtocol {
@@ -37,13 +41,13 @@ final class MovieViewModel: MovieViewModelProtocol {
     init() {
         
         if tasks.count == 0 {
-            getfilms()
+            getfilms(page: 1)
         }
     }
     
-    func getfilms() {
+    func getfilms(page: Int) {
         
-        shared.fetchMovie(page: 1, genre: .actionMovie) { result in
+        shared.fetchMovie(page: page, genre: .actionMovie) { result in
             switch result {
             case .success(let response):
                 print("++ \(response.docs )")
@@ -54,12 +58,6 @@ final class MovieViewModel: MovieViewModelProtocol {
         }
     }
 
-//    func getAllTasks() {
-//        tasks = CoreDataManager.shared.getAllTasks().map(CoreDataPreviewFilmModel.init)
-//
-//
-//    }
-
     func save(data: PreviewFilmResponse) {
         queue.async {
             var count: Int = 0
@@ -68,13 +66,20 @@ final class MovieViewModel: MovieViewModelProtocol {
                 let dataFilm = PreviewFilm(context: CoreDataManager.shared.viewContext)
 
                 let idFilm = CoreDataManager.shared.fetchItem(withAttributeID: String(film.id))
-                
+
                 if idFilm == nil {
                     dataFilm.id = Int64(film.id)
                     dataFilm.name = film.name
                     dataFilm.poster = film.poster.previewURL
                     dataFilm.rating = film.rating.imdb
-                    dataFilm.year = Int16(film.year)
+                    dataFilm.year = Int64(film.year)
+                    dataFilm.liked = false
+                    
+                    var genres: [String] = []
+                    for genre in film.genres {
+                        genres.append(genre.name)
+                    }
+                    dataFilm.genres = genres
                     
                     if dataFilm.name == "" || dataFilm.name == nil {
                         return
@@ -97,5 +102,14 @@ final class MovieViewModel: MovieViewModelProtocol {
             }
         }
         
+    }
+    
+    func sendIdToDetailFilm(id: Int) {
+        CombineData.shared.sendedId.send(id)
+    }
+    
+    func sendDataToAllFilms(tasks: [CoreDataPreviewFilmModel]) {
+        print("++ tasks count is \(tasks.count)")
+        CombineData.shared.allCardsMovies.send(tasks)
     }
 }

@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Kingfisher
 
-struct DetailAboutFilm: View {
+struct DetailAboutFilm<ViewModel: DetailAboutFilmModelProtocol>: View {
     
     @EnvironmentObject var coordinator: Coordinator
     @State private var activateModalView = false
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         
@@ -23,15 +25,21 @@ struct DetailAboutFilm: View {
                 /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
             })
             
-            Image("360")
+//            Image("360")
+            KFImage(URL(string: viewModel.tempFilmDet?.poster ?? "360"))
             
             Text("DetailView")
         }
+        .onAppear(perform: {
+            viewModel.getIdFromPreviewAndAllMovies()
+            
+        })
     }
+        
 }
 
 struct DetailAboutFilm_Previews: PreviewProvider {
     static var previews: some View {
-        DetailAboutFilm()
+        DetailAboutFilm( viewModel: DetailAboutFilmModel())
     }
 }

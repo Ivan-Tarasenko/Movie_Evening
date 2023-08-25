@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import Combine
 
 struct CardMovie: View {
     
@@ -14,6 +15,7 @@ struct CardMovie: View {
     let name: String
     let rating: Double
     let year: Int
+    let currentID: Int
     
     var body: some View {
         
@@ -25,10 +27,10 @@ struct CardMovie: View {
                     .frame(width: 152, height: 208)
                 
                 HStack {
-                    Text("Avatar")
+                    Text(name)
                         .font(.custom(R.Fonts.interLight, size: 16))
                     Spacer()
-                    Text("2019")
+                    Text(String(year))
                         .font(.custom(R.Fonts.interExtraLight, size: 14))
                 }
                 .frame(width: 152)
@@ -42,12 +44,13 @@ struct CardMovie: View {
             .clipShape(.rect(cornerRadius: 18))
             .borderWithGradient(R.Colors.borderBackground, width: 2, cornerRadius: 20)
         }
+        
     }
 }
 
 struct CardMovie_Previews: PreviewProvider {
     static var previews: some View {
-        CardMovie(urlImage: "", name: "", rating: 0.0, year: 0)
+        CardMovie(urlImage: "", name: "", rating: 0.0, year: 0, currentID: 0)
     }
 }
 

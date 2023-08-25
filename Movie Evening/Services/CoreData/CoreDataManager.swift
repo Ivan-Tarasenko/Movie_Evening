@@ -29,6 +29,16 @@ class CoreDataManager {
         
     }
     
+    func getDetailTask() -> [DetailFilm] {
+        let request: NSFetchRequest<DetailFilm> = DetailFilm.fetchRequest()
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            return []
+        }
+    }
+    
     func save() {
         do {
             try viewContext.save()
@@ -46,10 +56,23 @@ class CoreDataManager {
                 let items = try viewContext.fetch(fetchRequest)
                 return items.first
             } catch {
-                print("Ошибка при выполнении запроса: \(error)")
+                print("Ошибка при выполнении запроса: \(error.localizedDescription)")
                 return nil
             }
         }
+    
+    func fetchDetailFilm(id: Int) -> DetailFilm? {
+        let fetchRequest: NSFetchRequest<DetailFilm> = DetailFilm.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        
+        do {
+            let items = try viewContext.fetch(fetchRequest)
+            return items.first
+        } catch {
+            print("Ошибка при выполнении запроса: \(error.localizedDescription)")
+            return nil
+        }
+    }
     
     private init() {
         persistentContainer = NSPersistentContainer(name: "MovieEveningDataBase")

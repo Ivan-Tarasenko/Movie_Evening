@@ -85,7 +85,7 @@ final class Coordinator: ObservableObject {
         switch fullScreenCover {
         case .detailAboutFilm:
             NavigationStack {
-                DetailAboutFilm()
+                DetailAboutFilm(viewModel: DetailAboutFilmModel())
             }
         }
     }

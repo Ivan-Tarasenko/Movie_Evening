@@ -25,7 +25,9 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                 ForEach(sections) { section in
                     
                     Section(header: SectionHeaderView(title: section.titleSection) {
+                        viewModel.sendDataToAllFilms(tasks: viewModel.tasks)
                         coordinator.push(.allMovies)
+                        
                     }) {
                         
                         ScrollView(.horizontal) {
@@ -36,15 +38,17 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                                     if index <= 4 {
                                         CardMovie(
                                             urlImage: movie.poster,
-                                            name: movie.name,
+                                            name: movie.genres.first ?? "",
                                             rating: movie.rating,
-                                            year: movie.year
+                                            year: movie.year,
+                                            currentID: movie.id
                                         )
                                         .frame(width: 170, height: 300)
                                         .onTapGesture {
+                                            
                                             coordinator.present(fullScreenCover: .detailAboutFilm)
+                                            viewModel.sendIdToDetailFilm(id: movie.id)
                                         }
-                                        
                                     }
                                     
                                 }
