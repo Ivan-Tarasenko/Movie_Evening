@@ -11,6 +11,9 @@
         }
       }
     },
+    "%@" : {
+
+    },
     "Action Movie" : {
 
     },
@@ -96,9 +99,6 @@
           }
         }
       }
-    },
-    "Button" : {
-
     },
     "Catroons" : {
       "localizations" : {
@@ -235,9 +235,6 @@
           }
         }
       }
-    },
-    "DetailView" : {
-
     },
     "Detectives" : {
       "localizations" : {

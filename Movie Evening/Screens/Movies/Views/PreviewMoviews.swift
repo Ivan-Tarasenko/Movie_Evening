@@ -11,6 +11,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     
     @EnvironmentObject private var coordinator: Coordinator
     @ObservedObject  var viewModel: ViewModel
+    @State var idFIlm: Int
     
     var columns: [GridItem] = [GridItem(.flexible())]
     
@@ -45,7 +46,8 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                                         )
                                         .frame(width: 170, height: 300)
                                         .onTapGesture {
-                                            
+                                            idFIlm = movie.id
+                                            print("++ \(movie.id)")
                                             coordinator.present(fullScreenCover: .detailAboutFilm)
                                             viewModel.sendIdToDetailFilm(id: movie.id)
                                         }
@@ -82,6 +84,6 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     
     struct PreviewMoviews_Previews: PreviewProvider {
         static var previews: some View {
-            PreviewMoviews(viewModel: MovieViewModel())
+            PreviewMoviews(viewModel: MovieViewModel(), idFIlm: 0)
         }
     }

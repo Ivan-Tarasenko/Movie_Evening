@@ -11,6 +11,7 @@ import CoreData
 struct CoreDataDetailAboutFilm: Identifiable, Hashable {
     
     let film: DetailFilm
+//    let similarMovies: SimilarMovies
     
     var id: NSManagedObjectID {
         return film.objectID
@@ -44,5 +45,7 @@ struct CoreDataDetailAboutFilm: Identifiable, Hashable {
         return film.ratingKP
     }
     
-    
+//    var similar: [SimilarMovies] {
+//        return [similarMovies]
+//    }
 }

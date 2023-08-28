@@ -29,16 +29,6 @@ class CoreDataManager {
         
     }
     
-    func getDetailTask() -> [DetailFilm] {
-        let request: NSFetchRequest<DetailFilm> = DetailFilm.fetchRequest()
-        
-        do {
-            return try viewContext.fetch(request)
-        } catch {
-            return []
-        }
-    }
-    
     func save() {
         do {
             try viewContext.save()

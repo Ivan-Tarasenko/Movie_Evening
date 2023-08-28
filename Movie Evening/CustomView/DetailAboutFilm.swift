@@ -22,13 +22,21 @@ struct DetailAboutFilm<ViewModel: DetailAboutFilmModelProtocol>: View {
                 coordinator.dismissFullCover()
             }, label: {
                 Image(systemName: "chevron.backward")
-                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                Text("\(viewModel.tempDetailResponse?.name ?? "no name")")
             })
             
 //            Image("360")
-            KFImage(URL(string: viewModel.tempFilmDet?.poster ?? "360"))
+            KFImage(URL(string: viewModel.tempDetailResponse?.poster.previewURL ?? "360"))
             
-            Text("DetailView")
+            Text("\(String(describing: viewModel.tempFilmDet?.name))")
+            Text("\(String(describing: viewModel.tempFilmDet?.similarFilm?.count))")
+            
+            if let allSimilarMovies = viewModel.tempFilmDet?.similarFilm?.allObjects  as? [SimilarMovies]{
+                ForEach(allSimilarMovies, id: \.self){ nameMovie in
+                    Text("\(nameMovie.name ?? "")")
+                }
+            }
+            
         }
         .onAppear(perform: {
             viewModel.getIdFromPreviewAndAllMovies()

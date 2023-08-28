@@ -66,7 +66,7 @@ final class Coordinator: ObservableObject {
     func build(page: Page) -> some View {
         switch page {
         case .previewMoviews:
-            PreviewMoviews(viewModel: MovieViewModel())
+            PreviewMoviews(viewModel: MovieViewModel(), idFIlm: 0)
         case .previewSerials:
             PreviewSerials()
         case .random:

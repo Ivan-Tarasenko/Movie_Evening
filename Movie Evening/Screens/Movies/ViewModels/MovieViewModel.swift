@@ -18,7 +18,7 @@ protocol MovieViewModelProtocol: ObservableObject {
     
     func sendIdToDetailFilm(id: Int)
     
-    func sendDataToAllFilms(tasks: [CoreDataPreviewFilmModel]) 
+    func sendDataToAllFilms(tasks: [CoreDataPreviewFilmModel])
     
 }
 
@@ -40,6 +40,10 @@ final class MovieViewModel: MovieViewModelProtocol {
     
     init() {
         
+        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            print("++ first Data base in: \(documentsDirectory)")
+        }
+        
         if tasks.count == 0 {
             getfilms(page: 1)
         }
@@ -50,7 +54,7 @@ final class MovieViewModel: MovieViewModelProtocol {
         shared.fetchMovie(page: page, genre: .actionMovie) { result in
             switch result {
             case .success(let response):
-                print("++ \(response.docs )")
+//                print("++ \(response.docs )")
                 self.save(data: response)
             case .failure(let error):
                 print(error.localizedDescription)
@@ -112,4 +116,5 @@ final class MovieViewModel: MovieViewModelProtocol {
         print("++ tasks count is \(tasks.count)")
         CombineData.shared.allCardsMovies.send(tasks)
     }
+    
 }
