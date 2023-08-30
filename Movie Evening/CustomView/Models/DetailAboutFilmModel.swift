@@ -13,7 +13,7 @@ protocol DetailAboutFilmModelProtocol: ObservableObject {
     
     var aboutFilms: CoreDataDetailAboutFilm? { get set }
     
-    var tempFilmDet: DetailFilm? { get set }
+    var filmDetailed: DetailFilm? { get set }
     
     func getIdFromPreviewAndAllMovies()
     
@@ -27,7 +27,7 @@ final class DetailAboutFilmModel: DetailAboutFilmModelProtocol {
     
     @Published var aboutFilms: CoreDataDetailAboutFilm?
     
-    @Published var tempFilmDet: DetailFilm?
+    @Published var filmDetailed: DetailFilm?
     @Published var tempDetailResponse: DetailResponse?
     
     let shared: Networkable = NetworkManager()
@@ -67,29 +67,30 @@ final class DetailAboutFilmModel: DetailAboutFilmModelProtocol {
     func save(data: DetailResponse, id: Int) {
         queue.async {
             
-            var count: Int = 0
-            
-            //            for film in data.docs {
             let dataFilm = DetailFilm(context: CoreDataManager.shared.viewContext)
-            
-            let idFilm = CoreDataManager.shared.fetchDetailFilm(id: Int(bitPattern: dataFilm.id))
+            let idFilm = CoreDataManager.shared.fetchDetailFilm(id: String(id))
             
             if idFilm == nil {
                 dataFilm.id = Int64(id)
-                //                    dataFilm.name = film.name
-                //                    dataFilm.poster = film.poster.previewURL
-                //                    dataFilm.rating = film.rating.imdb
-                //                    dataFilm.year = Int64(film.year)
-                //                    dataFilm.liked = false
-                
-                //                    dataFilm.poster = data.poster.previewURL
+                dataFilm.filmDescriprion = data.description
+                var genres: [String] = []
+                for genre in data.genres {
+                    genres.append(genre.name)
+                }
+                dataFilm.genres = genres
                 dataFilm.name = data.name
-                
-                //                    var genres: [String] = []
-                //                    for genre in film.genres {
-                //                        genres.append(genre.name)
-                //                    }
-                //                    dataFilm.genres = genres
+                dataFilm.poster = data.poster.previewURL
+                dataFilm.ratingKP = data.rating.kp
+                dataFilm.ratingImdb = data.rating.imdb
+
+                for trailer in data.videos.trailers {
+                    let trailerInDB = Trailers(context: CoreDataManager.shared.viewContext)
+                    trailerInDB.detailFilm = dataFilm
+                    
+                    trailerInDB.name = trailer.name
+                    trailerInDB.site = trailer.site
+                    trailerInDB.url = trailer.url
+                }
                 
                 
                 for movie in data.similarMovies {
@@ -101,39 +102,34 @@ final class DetailAboutFilmModel: DetailAboutFilmModelProtocol {
                     similarMovies.poster = movie.poster.previewURL
                 }
                 
+                for person in data.persons {
+                    let actor = Actors(context: CoreDataManager.shared.viewContext)
+                    actor.detailFilm = dataFilm
+                    
+                    actor.id = Int64(person.id)
+                    actor.image = person.photo
+                    actor.name = person.name
+                }
+                
                 if dataFilm.name == "" || dataFilm.name == nil {
                     return
                 } else {
                     CoreDataManager.shared.save()
-                    count += 1
+                    DispatchQueue.main.async {
+                        self.filmDetailed = dataFilm
+                    }
                 }
                 
-            }
-            else {
+            } else {
                 DispatchQueue.main.async {
-                    self.tempFilmDet = CoreDataManager.shared.fetchDetailFilm(id: id)
-                    print("++ 1 tempFilDet \(String(describing: self.tempFilmDet))")
-                    self.aboutFilms = idFilm.map(CoreDataDetailAboutFilm.init)
+                    self.filmDetailed = idFilm
                 }
             }
+            
             
             if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 print("++ Data base in: \(documentsDirectory)")
             }
-            if count > 0 {
-                DispatchQueue.main.async {
-//                    let idFilm = CoreDataManager.shared.fetchDetailFilm(id: Int(bitPattern: dataFilm.id))
-                    self.tempFilmDet = dataFilm
-                    
-//                    self.tempFilmDet = CoreDataManager.shared.fetchDetailFilm(id: Int(dataFilm.id))
-                    print("++ 2 tempFilDet \(String(describing: self.tempFilmDet))")
-                }
-            }
-            
         }
-        
-        
-        //        }
-        
     }
 }

@@ -45,7 +45,7 @@ final class MovieViewModel: MovieViewModelProtocol {
         }
         
         if tasks.count == 0 {
-            getfilms(page: 1)
+            getfilms(page: 2)
         }
     }
     
@@ -70,7 +70,7 @@ final class MovieViewModel: MovieViewModelProtocol {
                 let dataFilm = PreviewFilm(context: CoreDataManager.shared.viewContext)
 
                 let idFilm = CoreDataManager.shared.fetchItem(withAttributeID: String(film.id))
-
+                
                 if idFilm == nil {
                     dataFilm.id = Int64(film.id)
                     dataFilm.name = film.name

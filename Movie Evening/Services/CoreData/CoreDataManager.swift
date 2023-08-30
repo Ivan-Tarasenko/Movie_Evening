@@ -51,7 +51,7 @@ class CoreDataManager {
             }
         }
     
-    func fetchDetailFilm(id: Int) -> DetailFilm? {
+    func fetchDetailFilm(id: String) -> DetailFilm? {
         let fetchRequest: NSFetchRequest<DetailFilm> = DetailFilm.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
@@ -63,6 +63,19 @@ class CoreDataManager {
             return nil
         }
     }
+//    
+//    func checkSimilarMovie(id: Int) -> SimilarMovies? {
+//        let fetchRequest: NSFetchRequest<SimilarMovies> = SimilarMovies.fetchRequest()
+//        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+//        
+//        do {
+//            let items = try viewContext.fetch(fetchRequest)
+//            return items.first
+//        } catch {
+//            print("Ошибка при выполнении запроса: \(error.localizedDescription)")
+//            return nil
+//        }
+//    }
     
     private init() {
         persistentContainer = NSPersistentContainer(name: "MovieEveningDataBase")

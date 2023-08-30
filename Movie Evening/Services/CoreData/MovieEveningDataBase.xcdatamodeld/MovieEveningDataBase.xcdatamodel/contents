@@ -4,7 +4,7 @@
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="toDetailFilm" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailFilm" inverseName="toActors" inverseEntity="DetailFilm"/>
+        <relationship name="detailFilm" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailFilm" inverseName="toActors" inverseEntity="DetailFilm"/>
     </entity>
     <entity name="DetailFilm" representedClassName="DetailFilm" syncable="YES" codeGenerationType="class">
         <attribute name="filmDescriprion" optional="YES" attributeType="String"/>
@@ -14,9 +14,9 @@
         <attribute name="poster" optional="YES" attributeType="String"/>
         <attribute name="ratingImdb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="ratingKP" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="trailers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <relationship name="similarFilm" optional="YES" toMany="YES" minCount="1" maxCount="10" deletionRule="Nullify" destinationEntity="SimilarMovies" inverseName="detailFilm" inverseEntity="SimilarMovies"/>
-        <relationship name="toActors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Actors" inverseName="toDetailFilm" inverseEntity="Actors"/>
+        <relationship name="toActors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Actors" inverseName="detailFilm" inverseEntity="Actors"/>
+        <relationship name="toTrailers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Trailers" inverseName="detailFilm" inverseEntity="Trailers"/>
     </entity>
     <entity name="PreviewFilm" representedClassName="PreviewFilm" syncable="YES" codeGenerationType="class">
         <attribute name="genres" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
@@ -32,5 +32,11 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="String"/>
         <relationship name="detailFilm" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailFilm" inverseName="similarFilm" inverseEntity="DetailFilm"/>
+    </entity>
+    <entity name="Trailers" representedClassName="Trailers" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="site" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="detailFilm" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailFilm" inverseName="toTrailers" inverseEntity="DetailFilm"/>
     </entity>
 </model>

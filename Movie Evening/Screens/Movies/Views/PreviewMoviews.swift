@@ -39,7 +39,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                                     if index <= 4 {
                                         CardMovie(
                                             urlImage: movie.poster,
-                                            name: movie.genres.first ?? "",
+                                            name: movie.name,
                                             rating: movie.rating,
                                             year: movie.year,
                                             currentID: movie.id

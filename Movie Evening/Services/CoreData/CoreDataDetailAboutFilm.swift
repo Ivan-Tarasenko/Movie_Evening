@@ -33,10 +33,6 @@ struct CoreDataDetailAboutFilm: Identifiable, Hashable {
         return film.poster ?? ""
     }
     
-    var trailers: [String] {
-        return film.trailers ?? [""]
-    }
-    
     var ratingImdb: Double {
         return film.ratingImdb
     }
