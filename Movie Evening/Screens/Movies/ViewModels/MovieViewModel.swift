@@ -49,9 +49,11 @@ final class MovieViewModel: MovieViewModelProtocol {
 //            print("++ first Data base in: \(documentsDirectory)")
 //        }
         
-//        for i in AllGenres.allCases {
+        for i in AllGenres.allCases {
             
-//            queue.async(group: group) {
+            queue.async(group: group) {
+                print("++ \(i.rawValue)")
+                self.group.enter()
 //                self.getfilms(page: 1, genre: i)
 //                self.getfilms(page: 1, genre: .actionMovie)
 //                self.getfilms(page: 1, genre: .adventures)
@@ -70,12 +72,12 @@ final class MovieViewModel: MovieViewModelProtocol {
 //                self.getfilms(page: 1, genre: .horrors)
 //                self.getfilms(page: 1, genre: .kids)
                 
-//            }
-//        }
+            }
+        }
     }
     
     func getfilms(page: Int, genre: AllGenres) {
-        group.enter()
+        
         apiShared.fetchMovie(page: page, genre: genre) { result in
             switch result {
             case .success(let response):
@@ -84,7 +86,7 @@ final class MovieViewModel: MovieViewModelProtocol {
                     guard let allMovies = allMovies else {
                         return print("error: data is not response from api and not have any data in data base")
                     }
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.tasks = allMovies
                         self.group.leave()
                     }

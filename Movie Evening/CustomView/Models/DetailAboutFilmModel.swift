@@ -32,7 +32,13 @@ final class DetailAboutFilmModel: DetailAboutFilmModelProtocol {
     func getIdFromPreviewAndAllMovies(){
         CombineData.shared.sendedId.sink { id in
             DispatchQueue.main.async {
-                self.getFilm(id: id)
+                let detailFilm = CoreDataManager.shared.fetchDetailFilm(id: String(id))
+                if detailFilm == nil {
+                    self.getFilm(id: id)
+                } else {
+                    self.filmDetailed = detailFilm
+                }
+                
             }
         }
         .store(in: &cancellable)
