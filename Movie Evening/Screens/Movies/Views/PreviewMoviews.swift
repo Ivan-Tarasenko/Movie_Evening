@@ -12,6 +12,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     @EnvironmentObject private var coordinator: Coordinator
     @ObservedObject  var viewModel: ViewModel
     @State var idFIlm: Int
+    @State var movies: [CoreDataPreviewFilmModel]
     
     var columns: [GridItem] = [GridItem(.flexible())]
     
@@ -26,7 +27,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                 ForEach(sections) { section in
                     
                     Section(header: SectionHeaderView(title: section.titleSection) {
-                        viewModel.sendDataToAllFilms(tasks: viewModel.tasks)
+                        viewModel.sendDataToAllFilms(genre: section.genres)
                         coordinator.push(.allMovies)
                         
                     }) {
@@ -35,7 +36,8 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                             
                             LazyHGrid(rows: columns) {
                                 
-                                ForEach(Array(viewModel.tasks.enumerated()), id: \.element.self) {index, movie in
+                                ForEach(Array(sortByGroup(genre: section.genres).enumerated()), id: \.element.self) {index, movie in
+                                    
                                     if index <= 4 {
                                         CardMovie(
                                             urlImage: movie.poster,
@@ -80,10 +82,14 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
         
     }
     
+    private func sortByGroup(genre: AllGenres) -> [CoreDataPreviewFilmModel]{
+        return viewModel.sortByGroupModel(genre: genre)
+    }
+    
 }
     
     struct PreviewMoviews_Previews: PreviewProvider {
         static var previews: some View {
-            PreviewMoviews(viewModel: MovieViewModel(), idFIlm: 0)
+            PreviewMoviews(viewModel: MovieViewModel(), idFIlm: 0, movies: [])
         }
     }

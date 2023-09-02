@@ -14,5 +14,5 @@ class CombineData {
     private init(){}
     
     var sendedId = CurrentValueSubject<Int, Never>(0)
-    var allCardsMovies = CurrentValueSubject<[CoreDataPreviewFilmModel], Never>([])
+    var allCardsMovies = CurrentValueSubject<AllGenres, Never>(.actionMovie)
 }

@@ -28,6 +28,10 @@ struct CoreDataPreviewFilmModel: Identifiable, Hashable {
         return film.genres ?? [""]
     }
     
+    var genreByGroup: String {
+        return film.genresByGroup ?? ""
+    }
+    
     var poster: String {
         return film.poster ?? ""
     }

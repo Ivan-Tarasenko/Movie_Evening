@@ -18,7 +18,11 @@ protocol MovieViewModelProtocol: ObservableObject {
     
     func sendIdToDetailFilm(id: Int)
     
-    func sendDataToAllFilms(tasks: [CoreDataPreviewFilmModel])
+    func sendDataToAllFilms(genre: AllGenres)
+    
+    func getfilms(page: Int, genre: AllGenres)
+    
+    func sortByGroupModel(genre: AllGenres) -> [CoreDataPreviewFilmModel]
     
 }
 
@@ -34,87 +38,78 @@ final class MovieViewModel: MovieViewModelProtocol {
     
     var previevFilms: [PreviewFilmResponse] = []
     
-    let shared: Networkable = NetworkManager()
+    let apiShared: Networkable = NetworkManager()
     
     let queue = DispatchQueue(label: "com.movieevening.app", qos: .background)
+    let group = DispatchGroup()
     
     init() {
         
-        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            print("++ first Data base in: \(documentsDirectory)")
-        }
+//        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+//            print("++ first Data base in: \(documentsDirectory)")
+//        }
         
-        if tasks.count == 0 {
-            getfilms(page: 2)
-        }
+//        for i in AllGenres.allCases {
+            
+//            queue.async(group: group) {
+//                self.getfilms(page: 1, genre: i)
+//                self.getfilms(page: 1, genre: .actionMovie)
+//                self.getfilms(page: 1, genre: .adventures)
+//                self.getfilms(page: 1, genre: .anime)
+//                self.getfilms(page: 1, genre: .biography)
+//                self.getfilms(page: 1, genre: .comedy)
+//                self.getfilms(page: 1, genre: .criminal)
+//                self.getfilms(page: 1, genre: .detective)
+//                self.getfilms(page: 1, genre: .documentary)
+//                self.getfilms(page: 1, genre: .drama)
+//                self.getfilms(page: 1, genre: .famaly)
+//                self.getfilms(page: 1, genre: .fantastic)
+//                self.getfilms(page: 1, genre: .fantasy)
+//                self.getfilms(page: 1, genre: .game)
+//                self.getfilms(page: 1, genre: .history)
+//                self.getfilms(page: 1, genre: .horrors)
+//                self.getfilms(page: 1, genre: .kids)
+                
+//            }
+//        }
     }
     
-    func getfilms(page: Int) {
-        
-        shared.fetchMovie(page: page, genre: .actionMovie) { result in
+    func getfilms(page: Int, genre: AllGenres) {
+        group.enter()
+        apiShared.fetchMovie(page: page, genre: genre) { result in
             switch result {
             case .success(let response):
-//                print("++ \(response.docs )")
-                self.save(data: response)
+                print("++ response \(response.docs.count), genres is \(genre.rawValue)")
+                CoreDataManager.shared.getOrSaveAllMovies(data: response, genres: genre) { allMovies in
+                    guard let allMovies = allMovies else {
+                        return print("error: data is not response from api and not have any data in data base")
+                    }
+                    DispatchQueue.main.async {
+                        self.tasks = allMovies
+                        self.group.leave()
+                    }
+                }
             case .failure(let error):
                 print(error.localizedDescription)
+                self.group.leave()
             }
         }
     }
 
-    func save(data: PreviewFilmResponse) {
-        queue.async {
-            var count: Int = 0
-            
-            for film in data.docs {
-                let dataFilm = PreviewFilm(context: CoreDataManager.shared.viewContext)
-
-                let idFilm = CoreDataManager.shared.fetchItem(withAttributeID: String(film.id))
-                
-                if idFilm == nil {
-                    dataFilm.id = Int64(film.id)
-                    dataFilm.name = film.name
-                    dataFilm.poster = film.poster.previewURL
-                    dataFilm.rating = film.rating.imdb
-                    dataFilm.year = Int64(film.year)
-                    dataFilm.liked = false
-                    
-                    var genres: [String] = []
-                    for genre in film.genres {
-                        genres.append(genre.name)
-                    }
-                    dataFilm.genres = genres
-                    
-                    if dataFilm.name == "" || dataFilm.name == nil {
-                        return
-                    } else {
-                        CoreDataManager.shared.save()
-                        count += 1
-                    }
-                    
-                }
-                
-            }
-            
-            if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                print("++ Data base in: \(documentsDirectory)")
-            }
-            if count > 0 {
-                DispatchQueue.main.async {
-                    self.tasks = CoreDataManager.shared.getAllTasks().map(CoreDataPreviewFilmModel.init)
-                }
-            }
-        }
-        
-    }
-    
     func sendIdToDetailFilm(id: Int) {
         CombineData.shared.sendedId.send(id)
     }
     
-    func sendDataToAllFilms(tasks: [CoreDataPreviewFilmModel]) {
-        print("++ tasks count is \(tasks.count)")
-        CombineData.shared.allCardsMovies.send(tasks)
+    func sendDataToAllFilms(genre: AllGenres) {
+//        print("++ tasks count is \(genre.rawValue)")
+        CombineData.shared.allCardsMovies.send(genre)
     }
     
+    func sortByGroupModel(genre: AllGenres) -> [CoreDataPreviewFilmModel]{
+        let newTasks = self.tasks.filter({
+            $0.genreByGroup == genre.rawValue
+        })
+        
+        return newTasks
+    }
 }
