@@ -49,7 +49,6 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                                             .frame(width: 170, height: 300)
                                             .onTapGesture {
                                                 idFIlm = movie.id
-                                                print("++ \(movie.id)")
                                                 coordinator.present(fullScreenCover: .detailAboutFilm)
                                                 viewModel.sendIdToDetailFilm(id: movie.id)
                                             }
@@ -58,7 +57,9 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                                     }
                                     
                                 }
-                                
+                                .onAppear {
+                                    viewModel.getfilms(page: 1, genre: section.genres)
+                                }
                             }
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color.clear)

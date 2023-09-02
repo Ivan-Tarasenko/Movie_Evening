@@ -94,12 +94,12 @@ extension CoreDataManager {
                         genres.append(genre.name)
                     }
                     dataFilm.genres = genres
-                    
-                    if dataFilm.name == "" || dataFilm.name == nil {
-                        return
-                    } else {
-                        self.save()
-                    }
+                    self.save()
+//                    if dataFilm.name == "" || dataFilm.name == nil {
+//                        return
+//                    } else {
+//                        self.save()
+//                    }
                     
                 }
                 

@@ -49,35 +49,35 @@ final class MovieViewModel: MovieViewModelProtocol {
 //            print("++ first Data base in: \(documentsDirectory)")
 //        }
         
-        for i in AllGenres.allCases {
-            
-            queue.async(group: group) {
-                print("++ \(i.rawValue)")
-                self.group.enter()
+//        for i in AllGenres.allCases {
+//            
+//            queue.async(group: group) {
+//                print("++ \(i.rawValue)")
+//                self.group.enter()
 //                self.getfilms(page: 1, genre: i)
-//                self.getfilms(page: 1, genre: .actionMovie)
-//                self.getfilms(page: 1, genre: .adventures)
-//                self.getfilms(page: 1, genre: .anime)
-//                self.getfilms(page: 1, genre: .biography)
-//                self.getfilms(page: 1, genre: .comedy)
-//                self.getfilms(page: 1, genre: .criminal)
-//                self.getfilms(page: 1, genre: .detective)
-//                self.getfilms(page: 1, genre: .documentary)
-//                self.getfilms(page: 1, genre: .drama)
-//                self.getfilms(page: 1, genre: .famaly)
-//                self.getfilms(page: 1, genre: .fantastic)
-//                self.getfilms(page: 1, genre: .fantasy)
-//                self.getfilms(page: 1, genre: .game)
-//                self.getfilms(page: 1, genre: .history)
-//                self.getfilms(page: 1, genre: .horrors)
-//                self.getfilms(page: 1, genre: .kids)
-                
-            }
-        }
+////                self.getfilms(page: 1, genre: .actionMovie)
+////                self.getfilms(page: 1, genre: .adventures)
+////                self.getfilms(page: 1, genre: .anime)
+////                self.getfilms(page: 1, genre: .biography)
+////                self.getfilms(page: 1, genre: .comedy)
+////                self.getfilms(page: 1, genre: .criminal)
+////                self.getfilms(page: 1, genre: .detective)
+////                self.getfilms(page: 1, genre: .documentary)
+////                self.getfilms(page: 1, genre: .drama)
+////                self.getfilms(page: 1, genre: .famaly)
+////                self.getfilms(page: 1, genre: .fantastic)
+////                self.getfilms(page: 1, genre: .fantasy)
+////                self.getfilms(page: 1, genre: .game)
+////                self.getfilms(page: 1, genre: .history)
+////                self.getfilms(page: 1, genre: .horrors)
+////                self.getfilms(page: 1, genre: .kids)
+//                
+//            }
+//        }
     }
     
     func getfilms(page: Int, genre: AllGenres) {
-        
+        group.enter()
         apiShared.fetchMovie(page: page, genre: genre) { result in
             switch result {
             case .success(let response):
