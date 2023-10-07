@@ -55,10 +55,10 @@ enum R {
     }
     
     enum Icons {
-        static let iconMovie = Image("movies")
-        static let iconSerial = Image("serials")
-        static let iconRandom = Image("random")
-        static let iconFavorite = Image("heart")
+        static let iconMovie = Image("Movies")
+        static let iconSerial = Image("Serials")
+        static let iconRandom = Image("Random")
+        static let iconFavorite = Image("Favorities")
     }
     
     enum Fonts {
@@ -72,7 +72,7 @@ enum R {
     }
     
     enum Colors {
-        static let cardBackground = LinearGradient(
+        static let cardGradient = LinearGradient(
             stops: [
                 Gradient.Stop(color: Color("CardColor2"), location: 0.00),
                 Gradient.Stop(color: Color("CardColor1"), location: 1.00),
@@ -81,7 +81,7 @@ enum R {
             endPoint: UnitPoint(x: 0.5, y: 0.96)
         )
         
-        static let borderBackground = LinearGradient(
+        static let borderCardGradient = LinearGradient(
             stops: [
                 Gradient.Stop(color: Color("BorderColor1"), location: 0.00),
                 Gradient.Stop(color: Color("BorderColor2"), location: 1.00),
@@ -90,7 +90,23 @@ enum R {
             endPoint: UnitPoint(x: 0.5, y: 0.96)
         )
         
-        static let MainBackground = Color(.black)
+        static let borderSearchGradient = LinearGradient(
+            stops: [
+                Gradient.Stop(color: Color("BorderColor1"), location: 0.00),
+                Gradient.Stop(color: Color("BorderColor2"), location: 1.00),
+            ],
+            startPoint: UnitPoint(x: 0.5, y: 0.4),
+            endPoint: UnitPoint(x: 0.7, y: 0.96)
+        )
+        
+        static let darkeningGradient =  LinearGradient(
+            gradient: Gradient(colors: [Color.clear, Color.black]),
+            startPoint: .bottom,
+            endPoint: .top
+        )
+        
+        static let backgroundDarkImage = Image("BackgroundDark")
+        static let backgtoundLightImage = Image("BackgroundLight")
     }
 }
 

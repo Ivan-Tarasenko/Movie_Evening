@@ -15,14 +15,12 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     var columns: [GridItem] = [GridItem(.flexible())]
     
     var body: some View {
-        ZStack {
-            
-            Image(.mainBackground)
-                .resizable()
-            
+        
             List {
                 
-                ForEach(sections) { section in
+                ForEach(sections.indices, id: \.self) { sectionIndex in
+                    
+                    let section = sections[sectionIndex]
                     
                     Section(header: SectionHeaderView(title: section.titleSection) {
                         coordinator.push(.allMovies)
@@ -33,6 +31,7 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                             LazyHGrid(rows: columns) {
                                 
                                 ForEach(Array(viewModel.tasks.enumerated()), id: \.element.self) {index, movie in
+                                    
                                     if index <= 4 {
                                         CardMovie(
                                             urlImage: movie.poster,
@@ -52,32 +51,45 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
                             }
                             
                         }
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 10, trailing: 0))
+                        .listRowInsets(EdgeInsets(top: -20, leading: 10, bottom: -10, trailing: 0))
                         .scrollIndicators(.hidden)
                         .headerProminence(.increased)
                         
                     }
+                    .listRowInsets(
+                        sectionIndex == 0 ?
+                        EdgeInsets(top: 150, leading: 10, bottom: 10, trailing: 0) :
+                            EdgeInsets(top: -20, leading: 10, bottom: -10, trailing: 0)
+                    )
                     
                 }
-                .scrollContentBackground(.hidden)
-                .listStyle(.grouped)
-                //            .navigationTitle(R.Strings.titleMovie)
+                .listRowBackground(Color.clear)
                 .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
                     coordinator.build(fullScreenCover: .detailAboutFilm)
                 }
                 
             }
-            
-        }
+            .listStyle(.grouped)
+            .scrollContentBackground(.hidden)
+            .overlay(alignment: .top) {
+                SearchView(viewModel: viewModel)
+            }
+            .onTapGesture {
+                hideKeyboard()
+            }
+            .background(AdaptiveImage(
+                light: R.Colors.backgtoundLightImage,
+                dark: R.Colors.backgroundDarkImage
+            ))
         
     }
     
 }
-    
-    struct PreviewMoviews_Previews: PreviewProvider {
-        static var previews: some View {
-            PreviewMoviews(viewModel: MovieViewModel())
-        }
+
+struct PreviewMoviews_Previews: PreviewProvider {
+    static var previews: some View {
+        PreviewMoviews(viewModel: MovieViewModel())
     }
+}
+
+

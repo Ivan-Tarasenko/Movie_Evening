@@ -13,20 +13,17 @@ struct DetailAboutFilm: View {
     @State private var activateModalView = false
     
     var body: some View {
-        
-        VStack(alignment: .leading) {
-            
-            Button(action: {
-                coordinator.dismissFullCover()
-            }, label: {
-                Image(systemName: "chevron.backward")
-                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-            })
-            
-            Image("360")
-            
-            Text("DetailView")
+        ZStack {
+            Image(._360)
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .frame(height: 350)
+
+            Text("Zverotopia")
         }
+        
+        
     }
 }
 
@@ -35,3 +32,5 @@ struct DetailAboutFilm_Previews: PreviewProvider {
         DetailAboutFilm()
     }
 }
+
+
