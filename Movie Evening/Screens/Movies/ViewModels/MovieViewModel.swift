@@ -45,35 +45,19 @@ final class MovieViewModel: MovieViewModelProtocol {
     
     init() {
         
-//        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//            print("++ first Data base in: \(documentsDirectory)")
-//        }
+        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            print("++ first Data base in: \(documentsDirectory)")
+        }
         
-//        for i in AllGenres.allCases {
-//            
-//            queue.async(group: group) {
-//                print("++ \(i.rawValue)")
-//                self.group.enter()
-//                self.getfilms(page: 1, genre: i)
-////                self.getfilms(page: 1, genre: .actionMovie)
-////                self.getfilms(page: 1, genre: .adventures)
-////                self.getfilms(page: 1, genre: .anime)
-////                self.getfilms(page: 1, genre: .biography)
-////                self.getfilms(page: 1, genre: .comedy)
-////                self.getfilms(page: 1, genre: .criminal)
-////                self.getfilms(page: 1, genre: .detective)
-////                self.getfilms(page: 1, genre: .documentary)
-////                self.getfilms(page: 1, genre: .drama)
-////                self.getfilms(page: 1, genre: .famaly)
-////                self.getfilms(page: 1, genre: .fantastic)
-////                self.getfilms(page: 1, genre: .fantasy)
-////                self.getfilms(page: 1, genre: .game)
-////                self.getfilms(page: 1, genre: .history)
-////                self.getfilms(page: 1, genre: .horrors)
-////                self.getfilms(page: 1, genre: .kids)
-//                
-//            }
-//        }
+        for i in AllGenres.allCases {
+            
+            queue.async(group: group) {
+                print("++ \(i.rawValue)")
+                self.group.enter()
+                self.getfilms(page: 1, genre: i)
+                
+            }
+        }
     }
     
     func getfilms(page: Int, genre: AllGenres) {
