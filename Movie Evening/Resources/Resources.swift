@@ -111,36 +111,36 @@ enum R {
 }
 
 let sections: [SectionModel] = [
-    .init(titleSection: R.Strings.top10),
-    .init(titleSection: R.Strings.top250),
-    .init(titleSection: R.Strings.comedy),
-    .init(titleSection: R.Strings.cartoon),
-    .init(titleSection: R.Strings.horror),
+    .init(titleSection: R.Strings.top10, genres: .actionMovie),
+    .init(titleSection: R.Strings.top250, genres: .adventures),
+    .init(titleSection: R.Strings.comedy, genres: .comedy),
+    .init(titleSection: R.Strings.cartoon, genres: .mult),
+    .init(titleSection: R.Strings.horror, genres: .horrors),
     
-        .init(titleSection: R.Strings.adventure),
-    .init(titleSection: R.Strings.actionMovie),
-    .init(titleSection: R.Strings.fantastic),
-    .init(titleSection: R.Strings.thriller),
-    .init(titleSection: R.Strings.melodrama),
+        .init(titleSection: R.Strings.adventure, genres: .adventures),
+    .init(titleSection: R.Strings.actionMovie, genres: .actionMovie),
+    .init(titleSection: R.Strings.fantastic, genres: .fantastic),
+    .init(titleSection: R.Strings.thriller, genres: .thriller),
+    .init(titleSection: R.Strings.melodrama, genres: .melodrama),
     
-        .init(titleSection: R.Strings.detective),
-    .init(titleSection: R.Strings.fantasy),
-    .init(titleSection: R.Strings.military),
-    .init(titleSection: R.Strings.family),
-    .init(titleSection: R.Strings.anime),
+        .init(titleSection: R.Strings.detective, genres: .detective),
+    .init(titleSection: R.Strings.fantasy, genres: .fantasy),
+    .init(titleSection: R.Strings.military, genres: .military),
+    .init(titleSection: R.Strings.family, genres: .famaly),
+    .init(titleSection: R.Strings.anime, genres: .anime),
     
-        .init(titleSection: R.Strings.historical),
-    .init(titleSection: R.Strings.drama),
-    .init(titleSection: R.Strings.documentary),
-    .init(titleSection: R.Strings.baby),
-    .init(titleSection: R.Strings.crime),
+        .init(titleSection: R.Strings.historical, genres: .history),
+    .init(titleSection: R.Strings.drama, genres: .drama),
+    .init(titleSection: R.Strings.documentary, genres: .documentary),
+    .init(titleSection: R.Strings.baby, genres: .kids),
+    .init(titleSection: R.Strings.crime, genres: .criminal),
     
-        .init(titleSection: R.Strings.biography),
-    .init(titleSection: R.Strings.western),
-    .init(titleSection: R.Strings.filmNoir),
-    .init(titleSection: R.Strings.musical),
-    .init(titleSection: R.Strings.sport),
+        .init(titleSection: R.Strings.biography, genres: .biography),
+    .init(titleSection: R.Strings.western, genres: .western),
+    .init(titleSection: R.Strings.filmNoir, genres: .noir),
+    .init(titleSection: R.Strings.musical, genres: .musical),
+    .init(titleSection: R.Strings.sport, genres: .sport),
     
-        .init(titleSection: R.Strings.talkShow),
-    .init(titleSection: R.Strings.game)
+        .init(titleSection: R.Strings.talkShow, genres: .tokShow),
+    .init(titleSection: R.Strings.game, genres: .game)
 ]

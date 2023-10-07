@@ -24,7 +24,7 @@ class Test {
     }
     
     init() {
-//        testFetch()
+        testFetch()
 //        testRandom()
 //        getDetailSerial()
 //        fetchTop250()

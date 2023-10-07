@@ -12,4 +12,5 @@ struct SectionModel: Identifiable {
     
     let id = UUID()
     let titleSection: Text
+    let genres: AllGenres
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol AllFilmsModelProtocol: ObservableObject {
     
@@ -14,6 +15,10 @@ protocol AllFilmsModelProtocol: ObservableObject {
     var isSearch: Bool { get set }
     
     var tasks: [CoreDataPreviewFilmModel] { get set }
+    
+    func sendIdToDetailFilm(id: Int)
+    
+    func getDataFromPreviewMovies()
     
 }
 
@@ -27,55 +32,19 @@ class AllFilmsModel: AllFilmsModelProtocol {
         return CoreDataManager.shared.getAllTasks().map(CoreDataPreviewFilmModel.init)
     }()
     
-    var previevFilms: [PreviewFilmResponse] = []
+    var cancellable = Set<AnyCancellable>()
     
-    let shared: Networkable = NetworkManager()
-    
-    let queue = DispatchQueue(label: "com.movieevening.app", qos: .background)
-    
-    init() {
-        if tasks.count == 0 {
-            getfilms()
-        }
+    func sendIdToDetailFilm(id: Int) {
+        CombineData.shared.sendedId.send(id)
     }
     
-    func getfilms() {
+    func getDataFromPreviewMovies(){
+        CombineData.shared.allCardsMovies.sink { genre in
+            let newTasks = self.tasks.filter({$0.genreByGroup == genre.rawValue})
+//            print("++ 2tasks count is \(genre.rawValue)")
+            self.tasks = newTasks
+        }
+        .store(in: &cancellable)
         
-        shared.fetchMovie(page: 1, genre: .actionMovie) { result in
-            switch result {
-            case .success(let response):
-                print("++ \(response.docs )")
-                self.save(data: response)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func save(data: PreviewFilmResponse) {
-        queue.async {
-            var count: Int = 0
-            
-            for film in data.docs {
-                let dataFilm = PreviewFilm(context: CoreDataManager.shared.viewContext)
-
-                let idFilm = CoreDataManager.shared.fetchItem(withAttributeID: String(film.id))
-                
-                if idFilm == nil {
-                    dataFilm.id = Int64(film.id)
-                    dataFilm.name = film.name
-                    dataFilm.poster = film.poster.previewURL
-                    dataFilm.rating = film.rating.imdb
-                    dataFilm.year = Int16(film.year)
-                    CoreDataManager.shared.save()
-                    count += 1
-                }
-            }
-            if count > 0 {
-                DispatchQueue.main.async {
-                    self.tasks = CoreDataManager.shared.getAllTasks().map(CoreDataPreviewFilmModel.init)
-                }
-            }
-        }
     }
 }
