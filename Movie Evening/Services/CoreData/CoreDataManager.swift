@@ -51,6 +51,10 @@ class CoreDataManager {
             if let error = error {
                 fatalError("Unable to initialize Core Data Stack \(error)")
             }
+            
+            if let url = self.persistentContainer.persistentStoreCoordinator.persistentStores.first?.url {
+                    print("Путь к базе данных Core Data: \(url)")
+                }
         }
         
     }

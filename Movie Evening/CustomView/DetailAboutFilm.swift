@@ -83,3 +83,5 @@ struct DetailAboutFilm_Previews: PreviewProvider {
         DetailAboutFilm( viewModel: DetailAboutFilmModel())
     }
 }
+
+

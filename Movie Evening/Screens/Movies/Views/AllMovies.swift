@@ -16,42 +16,39 @@ struct AllMovies<ViewModel: AllFilmsModelProtocol>: View {
     
     var body: some View {
         
+        
         ScrollView {
-            VStack {
-                Button {
+            
+            LazyVGrid(columns: columns, spacing: 16) {
+                ForEach(viewModel.tasks, id: \.self) {movie in
                     
-                } label: {
-                    Text("Sort by")
-                }
-
-                
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(viewModel.tasks, id: \.self) {movie in
-                        
-                        CardMovie(
-                            urlImage: movie.poster,
-                            name: movie.name,
-                            rating: movie.rating,
-                            year: movie.year,
-                            currentID: movie.id
-                        )
-                        .frame(width: 170, height: 300)
-                        .onTapGesture {
-                            viewModel.sendIdToDetailFilm(id: movie.id)
-                            coordinator.dismissFullCover()
-                            coordinator.present(fullScreenCover: .detailAboutFilm)
-                        }
-                        
+                    CardMovie(
+                        urlImage: movie.poster,
+                        name: movie.name,
+                        rating: movie.rating,
+                        year: movie.year,
+                        currentID: movie.id
+                    )
+                    .frame(width: 170, height: 300)
+                    .onTapGesture {
+                        viewModel.sendIdToDetailFilm(id: movie.id)
+                        coordinator.dismissFullCover()
+                        coordinator.present(fullScreenCover: .detailAboutFilm)
                     }
+                    
                 }
             }
-            
         }
         .onAppear(perform: {
             viewModel.getDataFromPreviewMovies()
         })
         .scrollContentBackground(.hidden)
-//        .background(R.Colors.MainBackground)
+        .background(
+            AdaptiveImage(
+                light: R.Colors.backgtoundLightImage,
+                dark: R.Colors.backgroundDarkImage
+            )
+        )
         .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
             coordinator.build(fullScreenCover: .detailAboutFilm)
         }

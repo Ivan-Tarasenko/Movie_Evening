@@ -14,18 +14,17 @@ struct SectionHeaderView: View {
     var body: some View {
         HStack {
              title
-                .font(.custom(R.Fonts.interExtraLight, size: 20))
+                .font(.custom(R.Fonts.interLight, size: 18))
                 .foregroundColor(Color.text)
             
             Spacer()
             
             Button(action: action) {
                 R.Strings.seeAll
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                    .font(.custom(R.Fonts.interExtraLight, size: 14))
+                    .foregroundColor(Color.subtext)
             }
         }
-        .padding(.horizontal)
-        
+        .padding(.horizontal, 15)
     }
 }

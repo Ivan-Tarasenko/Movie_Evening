@@ -33,16 +33,16 @@ struct CardMovie: View {
                     Text(String(year))
                         .font(.custom(R.Fonts.interExtraLight, size: 14))
                 }
-                .frame(width: 152)
+                .frame(width: 150)
                 
-                StarRating(viewModel: ViewModel())
+                StarRatingView(viewModel: CustomViewModel(rating: rating))
                 
             }
             .padding(10)
             .frame(width: 161, height: 254)
-            .background(R.Colors.cardBackground)
+            .background(R.Colors.cardGradient)
             .clipShape(.rect(cornerRadius: 18))
-            .borderWithGradient(R.Colors.borderBackground, width: 2, cornerRadius: 20)
+            .borderWithGradient(R.Colors.borderCardGradient, width: 2, cornerRadius: 20)
         }
         
     }
@@ -50,20 +50,23 @@ struct CardMovie: View {
 
 struct CardMovie_Previews: PreviewProvider {
     static var previews: some View {
+
         CardMovie(urlImage: "", name: "", rating: 0.0, year: 0, currentID: 0)
+
     }
 }
 
+// MARK: - Components CardMovie
 
-
-struct StarRating<ViewModel: ViewModelProtocol>: View {
+// MARK: - StarRationgView
+struct StarRatingView<ViewModel: CustomViewModelProtocol>: View {
 
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         
         HStack(spacing: 3) {
-            ForEach(Array(viewModel.arrayRatingValues.enumerated()), id: \.element.self) {_, value in
+            ForEach(viewModel.arrayRatingValues, id: \.self) { value in
                 
                 StarView(fillValue: value)
                 
@@ -73,7 +76,7 @@ struct StarRating<ViewModel: ViewModelProtocol>: View {
     }
 }
 
-
+// MARK: - StarView
 struct StarView: View {
     var fillValue: Double
     

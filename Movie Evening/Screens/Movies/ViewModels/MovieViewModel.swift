@@ -48,16 +48,21 @@ final class MovieViewModel: MovieViewModelProtocol {
         if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             print("++ first Data base in: \(documentsDirectory)")
         }
+       
+//        for i in AllGenres.allCases {
+//            
+//            queue.async(group: group) {
+//                print("++ \(i.rawValue)")
+//                self.group.enter()
+//                self.getfilms(page: 1, genre: i)
+//                
+//            }
+//        }
         
-        for i in AllGenres.allCases {
-            
-            queue.async(group: group) {
-                print("++ \(i.rawValue)")
-                self.group.enter()
-                self.getfilms(page: 1, genre: i)
-                
-            }
-        }
+//        Test()
+        
+        print("start")
+
     }
     
     func getfilms(page: Int, genre: AllGenres) {

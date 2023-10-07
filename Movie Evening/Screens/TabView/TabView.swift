@@ -39,7 +39,7 @@ struct TabBar: View {
                 iconTabBar: R.Icons.iconFavorite
             )
         }
-        .tint(Color.active)
+        .accentColor(Color.active)
         .environmentObject(coordinator)
         
     }
@@ -70,7 +70,6 @@ struct BaseScreen: View {
             } icon: {
                 iconTabBar
             }
-            
         }
     }
 }

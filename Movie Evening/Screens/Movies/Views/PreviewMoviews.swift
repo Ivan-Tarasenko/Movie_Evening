@@ -17,71 +17,83 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     var columns: [GridItem] = [GridItem(.flexible())]
     
     var body: some View {
-        ZStack {
+        
+        List {
             
-            Image(.mainBackground)
-                .resizable()
-            
-            List {
+            ForEach(sections.indices, id: \.self) { sectionIndex in
                 
-                ForEach(sections) { section in
-                    if viewModel.sortByGroupModel(genre: section.genres).isEmpty == false {
-                        Section(header: SectionHeaderView(title: section.titleSection) {
-                            viewModel.sendDataToAllFilms(genre: section.genres)
-                            coordinator.push(.allMovies)
+                let section = sections[sectionIndex]
+                
+                if viewModel.sortByGroupModel(genre: section.genres).isEmpty == false {
+                    
+                    Section(header: SectionHeaderView(title: section.titleSection) {
+                        viewModel.sendDataToAllFilms(genre: section.genres)
+                        coordinator.push(.allMovies)
+                    }) {
+                        
+                        ScrollView(.horizontal) {
                             
-                        }) {
-                            
-                            ScrollView(.horizontal) {
+                            LazyHGrid(rows: columns) {
                                 
-                                LazyHGrid(rows: columns) {
+                                ForEach(Array(sortByGroup(genre: section.genres).enumerated()), id: \.element.self) {index, movie in
                                     
-                                    ForEach(Array(sortByGroup(genre: section.genres).enumerated()), id: \.element.self) {index, movie in
-                                        
-                                        if index <= 4 {
-                                            CardMovie(
-                                                urlImage: movie.poster,
-                                                name: movie.name,
-                                                rating: movie.rating,
-                                                year: movie.year,
-                                                currentID: movie.id
-                                            )
-                                            .frame(width: 170, height: 300)
-                                            .onTapGesture {
-                                                idFIlm = movie.id
-                                                coordinator.present(fullScreenCover: .detailAboutFilm)
-                                                viewModel.sendIdToDetailFilm(id: movie.id)
-                                            }
+                                    if index <= 4 {
+                                        CardMovie(
+                                            urlImage: movie.poster,
+                                            name: movie.name,
+                                            rating: movie.rating,
+                                            year: movie.year,
+                                            currentID: movie.id
+                                        )
+                                        .frame(width: 170, height: 300)
+                                        .onTapGesture {
+                                            idFIlm = movie.id
+                                            coordinator.present(fullScreenCover: .detailAboutFilm)
+                                            viewModel.sendIdToDetailFilm(id: movie.id)
                                         }
                                         
                                     }
                                     
                                 }
-                                .onAppear {
-                                    viewModel.getfilms(page: 1, genre: section.genres)
-                                }
+                                
                             }
-                            .listRowSeparator(.hidden)
-                            .listRowBackground(Color.clear)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 10, trailing: 0))
-                            .scrollIndicators(.hidden)
-                            .headerProminence(.increased)
-                            
+                            .onAppear {
+                                viewModel.getfilms(page: 1, genre: section.genres)
+                            }
                         }
+                        .listRowInsets(EdgeInsets(top: -20, leading: 10, bottom: -10, trailing: 0))
+                        .scrollIndicators(.hidden)
+                        .headerProminence(.increased)
+                        
                     }
+                    .listRowInsets(
+                        sectionIndex == 0 ?
+                        EdgeInsets(top: 150, leading: 10, bottom: 10, trailing: 0) :
+                            EdgeInsets(top: -20, leading: 10, bottom: -10, trailing: 0)
+                    )
                     
-                    
-                }
-                .scrollContentBackground(.hidden)
-                .listStyle(.grouped)
-                //            .navigationTitle(R.Strings.titleMovie)
-                .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
-                    coordinator.build(fullScreenCover: .detailAboutFilm)
                 }
                 
             }
+            .listRowBackground(Color.clear)
+            .fullScreenCover(item: $coordinator.fullScreenCover) { fullScreenCover in
+                coordinator.build(fullScreenCover: .detailAboutFilm)
+            }
+            
             
         }
+        .listStyle(.grouped)
+        .scrollContentBackground(.hidden)
+        .overlay(alignment: .top) {
+            SearchView(viewModel: viewModel)
+        }
+        .onTapGesture {
+            hideKeyboard()
+        }
+        .background(AdaptiveImage(
+            light: R.Colors.backgtoundLightImage,
+            dark: R.Colors.backgroundDarkImage
+        ))
         
     }
     
@@ -90,9 +102,14 @@ struct PreviewMoviews<ViewModel: MovieViewModelProtocol>: View {
     }
     
 }
-    
-    struct PreviewMoviews_Previews: PreviewProvider {
-        static var previews: some View {
-            PreviewMoviews(viewModel: MovieViewModel(), idFIlm: 0, movies: [])
-        }
+
+
+struct PreviewMoviews_Previews: PreviewProvider {
+    static var previews: some View {
+        PreviewMoviews(viewModel: MovieViewModel(), idFIlm: 0, movies: [])
     }
+    
+}
+
+
+
