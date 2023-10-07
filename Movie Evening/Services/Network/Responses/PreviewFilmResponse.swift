@@ -19,6 +19,7 @@ struct Doc: Codable {
     let name: String
     let year: Int
     let poster: Poster
+    let genres: [Genres]
     let names: [Name]
 }
 
@@ -29,4 +30,8 @@ struct Poster: Codable {
     enum CodingKeys: String, CodingKey {
         case previewURL = "previewUrl"
     }
+}
+
+struct Genres: Codable {
+    let name: String
 }

@@ -24,8 +24,12 @@ struct CoreDataPreviewFilmModel: Identifiable, Hashable {
         return film.name ?? ""
     }
     
-    var names: [String] {
-        return film.names ?? [""]
+    var genres: [String] {
+        return film.genres ?? [""]
+    }
+    
+    var genreByGroup: String {
+        return film.genresByGroup ?? ""
     }
     
     var poster: String {
@@ -38,5 +42,9 @@ struct CoreDataPreviewFilmModel: Identifiable, Hashable {
     
     var year: Int {
         return Int(film.year)
+    }
+    
+    var liked: Bool {
+        return film.liked
     }
 }

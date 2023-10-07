@@ -97,7 +97,7 @@ struct ReleaseYear: Codable {
 struct SimilarMovie: Codable {
     let id: Int
     let name: String
-    let alternativeName, type: String
+//    let alternativeName, type: String
     let poster: Backdrop
 }
 
@@ -109,7 +109,8 @@ struct Videos: Codable {
 // MARK: - Trailer
 struct Trailer: Codable {
     let url: String
-    let name, site, type: String
+    let name, site: String
+//    let type: String
 }
 
 // MARK: - Watchability
