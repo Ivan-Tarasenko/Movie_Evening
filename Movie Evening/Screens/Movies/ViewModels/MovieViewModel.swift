@@ -48,7 +48,7 @@ final class MovieViewModel: MovieViewModelProtocol {
         if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             print("++ first Data base in: \(documentsDirectory)")
         }
-        
+       
 //        for i in AllGenres.allCases {
 //            
 //            queue.async(group: group) {
@@ -62,6 +62,7 @@ final class MovieViewModel: MovieViewModelProtocol {
 //        Test()
         
         print("start")
+
     }
     
     func getfilms(page: Int, genre: AllGenres) {
